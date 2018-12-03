@@ -1,5 +1,5 @@
 import React from "react";
-import style from '../styles/index.less';
+// import style from '../styles/index.less';
 
 class Mheader extends React.Component{
   constructor(props){
