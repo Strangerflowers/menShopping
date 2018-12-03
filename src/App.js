@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Route} from "react-router-dom";
+// import { Route} from "react-router-dom";
 
 import Index from './pages/Index.jsx';
-import Detail from './pages/detail.jsx';
+// import Detail from './pages/detail.jsx';
 // import './styles/App.css';
 
 class App extends Component {
@@ -11,8 +11,7 @@ class App extends Component {
       <div className="App">
         {/* <Redirect exact from='/' to='/home/hot/'/> */}
       		
-            <Route path="/home/" component={Index} />
-            <Route path="/detail/" component={Detail}/>
+           <Index />
           
       </div>
     );

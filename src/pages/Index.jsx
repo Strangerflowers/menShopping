@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
-import {Route} from 'react-router-dom';
-import Wheader from '../components/Wheader.jsx';
-import Wpannel from '../components/Wpannel.jsx';
+// import {Route} from 'react-router-dom';
+import Mheader from '../components/Wheader.jsx';
+
 
 class Index extends Component{
 	constructor(props){
@@ -11,10 +11,7 @@ class Index extends Component{
 	render(){
 		return (
 			<div>
-				 <Wheader history={this.props.history} ></Wheader>
-				
-				<Route path="/home/hot/" component={Wpannel} />
-				<Route path="/home/fresh/" component={Wpannel} />
+				<Mheader/>
 			</div>
 		);
 	}
