@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 // import {Route} from 'react-router-dom';
 import Mheader from '../components/Wheader.jsx';
-
+import Footer from '../components/Footer.jsx';
 
 class Index extends Component{
 	constructor(props){
@@ -12,6 +12,7 @@ class Index extends Component{
 		return (
 			<div>
 				<Mheader/>
+				<Footer/>
 			</div>
 		);
 	}
