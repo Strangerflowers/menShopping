@@ -52,6 +52,7 @@
     "react-dom": "^16.6.3",
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.1",
+    "reactjs-swiper": "^0.1.0",
     "redux": "^4.0.1",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
