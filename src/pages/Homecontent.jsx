@@ -83,7 +83,7 @@ class Homecontent extends Component{
 												return items.goods.item.map((item,index)=>{
 													return (
 														<li key={index}>
-			 												<img src={item.goods_image} className="goodsImg"/>
+			 												<img src={item.goods_image} className="goodsImg" alt=""/>
 			 												<p>{item.goods_name}</p>
 			 												<p className="price">{item.goods_price}</p>
 			 											</li>
