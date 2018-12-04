@@ -13,7 +13,6 @@ class Footer extends React.Component{
             <li> 
               <a href="#">
                 <i className="home">
-                  
                 </i>
                 <p>首页</p>
               </a>
