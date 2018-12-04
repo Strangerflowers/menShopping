@@ -9,7 +9,7 @@ const ReactSwiperExample = (props) => {
 	console.log(props);
 	var items = [];
 	for(var i=0;i<props.banner.length;i++){
-		items.push({
+		items.push({ 
 			image: props.banner[i].image,
 			title: props.banner[i].data,
 			link: props.banner[i].type
