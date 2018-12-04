@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import footerLess from '../styles/footer.less';
 class Footer extends React.Component{
   constructor(props){
@@ -11,35 +12,35 @@ class Footer extends React.Component{
          <div id="footnav" className="footnav clearfix">
           <ul>
             <li> 
-              <a href="#">
+              <Link to="/home/">
                 <i className="home">
                 </i>
                 <p>首页</p>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#">
+              <Link to="/classify/">
                 <i className="categroy"></i>
                 <p>分类</p>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#">
+              <Link to="/news/">
                 <i className="search"></i>
                 <p>消息</p>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#">
+              <Link to="/cart/">
                 <i className="cart"></i>
                 <p>购物车</p>
-              </a>
+              </Link>
             </li>
            <li>
-              <a href="#">
+              <Link to="/my/">
                 <i className="member"></i>
                 <p>我的</p>
-              </a>
+              </Link>
             </li>
           </ul>
          </div>

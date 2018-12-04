@@ -2,13 +2,13 @@ import React,{ Component } from 'react';
 import '../styles/Homecontent.less';
 import axios from 'axios';
 // 路由跳转
-import { Route , withRouter , Link , Router} from "react-router-dom"
+import { Link } from "react-router-dom"
 // import { Link } from "react-router-dom";
 
 
 // 引入轮播图
 import ReactSwiper from 'reactjs-swiper';
-import Detail from './Details/details.jsx';
+// import Detail from './Details/details.jsx';
 // 轮播图组件
 const ReactSwiperExample = (props) => {
 	// console.log(props);
@@ -100,9 +100,11 @@ class Homecontent extends Component{
 											(()=>{
 												return items.goods.item.map((item,index)=>{
 													return (
-														<li key={index}>
-														<Link to='/Detail/' >
-			 												<img src={item.goods_image} className="goodsImg"/>
+														<li key={index}> 
+														<Link to={`/details/${item.goods_id}`} > 
+														
+			 												<img src={item.goods_image} className="goodsImg" alt=""/>
+
 			 												<p>{item.goods_name}</p>
 			 												<p className="price">{item.goods_price}</p>
 			 											</Link>
@@ -112,7 +114,7 @@ class Homecontent extends Component{
 
 														)
 												})
-											})()
+											})() 
 										}
 									</ul>
 								</div>
@@ -127,6 +129,9 @@ class Homecontent extends Component{
 		);
 	}
 }
+// <Link to={{pathname:'/details/',state:{id:item.goods_id}}} >
+// <Link to={`/details/${item.goods_id}`} >
+
 // <link to={{pathname: '/Details',state:item.goods_id}}>
 // Homecontent = withRouter(Homecontent);
 export default Homecontent;
