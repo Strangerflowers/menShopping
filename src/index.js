@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {HashRouter as Router} from 'react-router-dom';
 // import { HashRouter as Router} from "react-router-dom";
 // import axios from 'axios'; 
 // import './styles/index.css';
@@ -15,8 +16,9 @@ import * as serviceWorker from './libs/serviceWorker';
 // React.axios = axios;
 
 ReactDOM.render(
-
-		<App />,
+	<Router>
+			<App/>
+	</Router>,
 	document.getElementById('root')
 )
 

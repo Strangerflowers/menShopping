@@ -1,9 +1,6 @@
 import React from "react";
-<<<<<<< HEAD
-// import style from '../styles/index.less';
-=======
 import headerLess from '../styles/header.less';
->>>>>>> fa2d3fe7b1811412ccbb41492b69fbca01a84ad2
+
 
 class Mheader extends React.Component{
   constructor(props){

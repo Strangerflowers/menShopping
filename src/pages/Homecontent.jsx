@@ -1,12 +1,17 @@
 import React,{ Component } from 'react';
 import '../styles/Homecontent.less';
 import axios from 'axios';
+// 路由跳转
+import { Route , withRouter , Link , Router} from "react-router-dom"
+// import { Link } from "react-router-dom";
+
 
 // 引入轮播图
 import ReactSwiper from 'reactjs-swiper';
-
+import Detail from './Details/details.jsx';
+// 轮播图组件
 const ReactSwiperExample = (props) => {
-	console.log(props);
+	// console.log(props);
 	var items = [];
 	for(var i=0;i<props.banner.length;i++){
 		items.push({ 
@@ -14,8 +19,8 @@ const ReactSwiperExample = (props) => {
 			title: props.banner[i].data,
 			link: props.banner[i].type
 		})
-		console.log(props[i]);
-		console.log(items);
+		// console.log(props[i]);
+		// console.log(items);
 	}
   const swiperOptions = {
     preloadImages: true,
@@ -28,16 +33,29 @@ const ReactSwiperExample = (props) => {
   );
 };
 
+
 class Homecontent extends Component{
 	constructor(props){
 		super(props);
 		this.props = props;
 		this.state = {
 			goodslist : [],
-			banner: []
+			banner: [],
+			path: '/Details'
 		}
 	}
-	// goPage(){}
+	// 点击跳转详情页
+	// goPage(currentId){
+	// 	console.log(this);
+	// 	console.log(currentId);
+	// 	let {history} = this.props;
+	// 	history.push({
+	// 		pathname:this.state.path,
+	// 		id: currentId
+	// 	})
+
+	// }
+	// 获取页面数据
 	getData(){
 		axios.get('https://www.nanshig.com/mobile/index.php?act=index')
 		.then((res)=>{
@@ -54,7 +72,7 @@ class Homecontent extends Component{
 				 goodslist : goods,
 				 banner : banners
 			})
-			console.log(this.state.banner);
+			// console.log(this.state.banner);
 		})
 		.catch((err)=>{
 			console.log(err);
@@ -83,39 +101,38 @@ class Homecontent extends Component{
 												return items.goods.item.map((item,index)=>{
 													return (
 														<li key={index}>
+														<Link to='/Detail/' >
 			 												<img src={item.goods_image} className="goodsImg"/>
 			 												<p>{item.goods_name}</p>
 			 												<p className="price">{item.goods_price}</p>
+			 											</Link>
 			 											</li>
+
+			 											
+
 														)
 												})
 											})()
 										}
 									</ul>
 								</div>
+
 								)
 						})
 					})()
 				}
+				 
 			</div>
+
 		);
 	}
 }
+// <link to={{pathname: '/Details',state:item.goods_id}}>
+// Homecontent = withRouter(Homecontent);
 export default Homecontent;
-
-// <div className="goods">
-// <p className="title">text1</p>
-// <ul>
-// 	<li>
-// 		<img src="" className="goodsImg"/>
-// 		<p >text</p>
-// 		<p className="price">price</p>
-// 	</li>
-// </ul>
-// </div>
-
-// <li>
-//  												<img src={item.goods.item.goods_image} className="goodsImg"/>
-//  												<p >item.goods.item.goods_name</p>
-//  												<p className="price">item.goods.item.goods_price</p>
-//  											</li>
+// onClick={this.goPage.bind(this,item.goods_id)}
+// <Link to={{
+//       pathname: '/pay',
+//       search: '?sort=name',
+//       state: { price: 18 }
+//     }} />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 
+import Index from './pages/Index.jsx';
 
 
 
@@ -10,6 +11,9 @@ class App extends Component {
     return (
       <div className="App">
        
+
+      		<Index />
+
            
           
       </div>
