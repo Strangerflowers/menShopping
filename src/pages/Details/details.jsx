@@ -4,6 +4,7 @@ import '../../styles/details.less';
 class Content extends React.Component{
 	constructor(props){
 		super(props)
+		console.log('props',props);
 		this.state={
 			goodsDetail: [],
 			goodsname: '',

@@ -18,7 +18,7 @@ class Classify extends Component {
     React.axios
       .get("https://www.nanshig.com/mobile/index.php?act=goods_class")
       .then(res => {
-        console.log(res);
+        // console.log(res);
         // console.log(res.data.datas.class_list);
         this.setState({
           cards: res.data.datas.class_list
@@ -37,12 +37,12 @@ class Classify extends Component {
         "https://www.nanshig.com/mobile/index.php?act=goods_class&op=get_child_all&gc_id=256"
       )
       .then(res => {
-        console.log(123,res);
+        // console.log(123,res);
         this.setState({
           class_list: res.data.datas.class_list[0].child,
           nav:res.data.datas.class_list[0].gc_name
         });
-        console.log(this.state.class_list);
+        // console.log(this.state.class_list);
       })
       .catch(error => {
         console.log(error);
@@ -55,11 +55,11 @@ class Classify extends Component {
         "https://www.nanshig.com/mobile/index.php?act=goods&op=goods_list&gc_id=256&page=20"
       )
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.setState({
           goods_list: res.data.datas.goods_list
         });
-        console.log(this.state.goods_list);
+        // console.log(this.state.goods_list);
       })
       .catch(error => {
         console.log(error);
@@ -87,13 +87,13 @@ class Classify extends Component {
         `https://www.nanshig.com/mobile/index.php?act=goods_class&op=get_child_all&gc_id=${gc_id}`
       )
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.setState({
           class_list: res.data.datas.class_list[0].child,
           nav:res.data.datas.class_list[0].gc_name
 
         });
-        console.log(this.state.class_list);
+        // console.log(this.state.class_list);
       })
       .catch(error => {
         console.log(error);
@@ -104,16 +104,19 @@ class Classify extends Component {
         `https://www.nanshig.com/mobile/index.php?act=goods&op=goods_list&gc_id=${gc_id}&page=20`
       )
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.setState({
           goods_list: res.data.datas.goods_list
         });
-        console.log(this.state.goods_list);
+        // console.log(this.state.goods_list);
       })
       .catch(error => {
         console.log(error);
       });
 	}
+//   https://www.nanshig.com/mobile/index.php?act=goods&op=goods_list&gc_id=264&page=10&curpage=1&gc_id=264
+// https://www.nanshig.com/mobile/index.php?act=goods&op=goods_list&gc_id=268&page=10&curpage=1&gc_id=268
+
 
   componentDidMount() {
     this.getData();
@@ -157,12 +160,13 @@ class Classify extends Component {
             </dt>
             {(() => {
               return this.state.class_list.map((item, idx) => {
+                // console.log('item',item)
                 return (
                   <dd key={idx}>
-                    <a href="#">
+                    <Link to={`/goodslist/${item.gc_id}/`}>
                       <img src={item.gc_image} alt="" />
                       <p>{item.gc_name}</p>
-                    </a>
+                    </Link>
                   </dd>
                 );
               });

@@ -41,7 +41,7 @@ class Homecontent extends Component{
 		this.state = {
 			goodslist : [],
 			banner: [],
-			path: '/Details'
+			// path: '/Details'
 		}
 	}
 	// 点击跳转详情页
