@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { HashRouter as Router} from "react-router-dom";
-
+// import './asset/font/iconfont.css'
 
 // import axios from 'axios'; 
 // import './styles/index.css';

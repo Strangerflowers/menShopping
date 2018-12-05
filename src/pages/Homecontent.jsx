@@ -19,8 +19,6 @@ const ReactSwiperExample = (props) => {
 			title: props.banner[i].data,
 			link: props.banner[i].type
 		})
-		// console.log(props[i]);
-		// console.log(items);
 	}
   const swiperOptions = {
     preloadImages: true,
@@ -33,7 +31,6 @@ const ReactSwiperExample = (props) => {
   );
 };
 
-
 class Homecontent extends Component{
 	constructor(props){
 		super(props);
@@ -44,17 +41,6 @@ class Homecontent extends Component{
 			path: '/Details'
 		}
 	}
-	// 点击跳转详情页
-	// goPage(currentId){
-	// 	console.log(this);
-	// 	console.log(currentId);
-	// 	let {history} = this.props;
-	// 	history.push({
-	// 		pathname:this.state.path,
-	// 		id: currentId
-	// 	})
-
-	// }
 	// 获取页面数据
 	getData(){
 		axios.get('https://www.nanshig.com/mobile/index.php?act=index')
@@ -72,7 +58,6 @@ class Homecontent extends Component{
 				 goodslist : goods,
 				 banner : banners
 			})
-			// console.log(this.state.banner);
 		})
 		.catch((err)=>{
 			console.log(err);
@@ -109,17 +94,13 @@ class Homecontent extends Component{
 			 												<p className="price">{item.goods_price}</p>
 			 											</Link>
 			 											</li>
-
-			 											
-
 														)
-												})
+													})
 											})() 
 										}
 									</ul>
 								</div>
-
-								)
+							)
 						})
 					})()
 				}
@@ -129,11 +110,6 @@ class Homecontent extends Component{
 		);
 	}
 }
-// <Link to={{pathname:'/details/',state:{id:item.goods_id}}} >
-// <Link to={`/details/${item.goods_id}`} >
-
-// <link to={{pathname: '/Details',state:item.goods_id}}>
-// Homecontent = withRouter(Homecontent);
 export default Homecontent;
 // onClick={this.goPage.bind(this,item.goods_id)}
 // <Link to={{

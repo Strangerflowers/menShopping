@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import '../../styles/details.less';
+// import Addcar from './addCar.jsx';
 class Content extends React.Component{
 	constructor(props){
 		super(props)
 		this.state={
+			// goodsDetail: [{a:''}]
 			goodsDetail: [],
 			goodsname: '',
 			Text1 : '',
@@ -14,7 +16,6 @@ class Content extends React.Component{
 			fahuo : '',
 			fuwu : '',
 			goodsList: []
-
 		}
 	}
 	// 获取数据
@@ -60,43 +61,54 @@ class Content extends React.Component{
 	}
 	render(){
 		return (
-			<div className="details">
-			<div className="con">
-					<div className="goods">
-						<div>
-							<img src={this.state.goodsDetail.goods_image} alt="" className="detailIMG"/>
+			<div>
+				<div className="details">
+					<div className="con">
+						<div className="goods">
+							<div>
+								<img src={this.state.goodsDetail.goods_image} alt="" className="detailIMG"/>
+							</div>
+							<p className="title">{this.state.goodsname}</p>
+							<p className="price"><span>{this.state.goodsprice}</span><span>销量</span></p>
+							<p><span>{this.state.Text1}</span><span>{this.state.Text2}</span><span>{this.state.Text3}</span></p>
+							<p><span>已选</span><span>颜色</span><span>尺码</span></p>
 						</div>
-						<p className="title">{this.state.goodsname}</p>
-						<p className="price"><span>{this.state.goodsprice}</span><span>销量</span></p>
-						<p><span>{this.state.Text1}</span><span>{this.state.Text2}</span><span>{this.state.Text3}</span></p>
-						<p><span>已选</span><span>颜色</span><span>尺码</span></p>
+						<p className="evaluate">商品评价</p>
+						<div className="shop">
+							<p className="name">潮衣阁</p>
+							<p><span>{this.state.miaosu.text}</span>{this.state.miaosu.credit}<span>{this.state.fahuo.text}</span>{this.state.fahuo.credit}<span>{this.state.fuwu.text}</span>{this.state.fuwu.credit}</p>
+						</div>
+						<div className="goodslist">
+							<p>店铺推荐</p>
+							<ul>
+								{
+									(()=>{
+										return this.state.goodsList.map((item,index)=>{
+										return <li key={index}>
+													<img src={item.goods_image_url} alt="" />
+													<p>{item.goods_name}</p>
+													<span>{item.goods_promotion_price}</span>
+												</li>
+										})
+									})()
+								}
+							</ul>
+						</div>
+						<div className="more">查看更多</div>
 					</div>
-					<p className="evaluate">商品评价</p>
-					<div className="shop">
-						<p className="name">潮衣阁</p>
-						<p><span>{this.state.miaosu.text}</span>{this.state.miaosu.credit}<span>{this.state.fahuo.text}</span>{this.state.fahuo.credit}<span>{this.state.fuwu.text}</span>{this.state.fuwu.credit}</p>
-					</div>
-					<div className="goodslist">
-						<p>店铺推荐</p>
-						<ul>
-							{
-								(()=>{
-									return this.state.goodsList.map((item,index)=>{
-									return <li key={index}>
-												<img src={item.goods_image_url} alt="" />
-												<p>{item.goods_name}</p>
-												<span>{item.goods_promotion_price}</span>
-											</li>
-									})
-								})()
-							}
-						</ul>
-					</div>
-					<div className="more">查看更多</div>
 				</div>
+				{/*
+				<div className="footer">
+					<div className="service">客服</div>
+					<div className="car">购物车</div>
+					<div className="buy">立即购买</div>
+					<div className="aadCar">加入购物车</div>
+				</div>
+				*/}
 				
 			</div>
 		)
 	}
 }
 export default Content;
+	// <Addcar />
