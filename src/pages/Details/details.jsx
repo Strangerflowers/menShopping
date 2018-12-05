@@ -82,7 +82,7 @@ class Content extends React.Component{
 							{
 								(()=>{
 									return this.state.goodsList.map((item,index)=>{
-									return <li key>
+									return <li key={index}>
 												<img src={item.goods_image_url} alt="" />
 												<p>{item.goods_name}</p>
 												<span>{item.goods_promotion_price}</span>
