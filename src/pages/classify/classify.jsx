@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import classifyLess from "../../styles/classify.less";
+import "../../styles/classify.less";
 import Mheader from "../../components/Wheader.jsx";
 import Footer from '../../components/Footer.jsx';
 import { Link } from "react-router-dom";
@@ -76,9 +76,9 @@ class Classify extends Component {
 			gc_id = 256
 		}else if (ggcId === '下装') {
 			gc_id = 2
-		}else if(ggcId=='鞋靴'){
+		}else if(ggcId==='鞋靴'){
       gc_id=1
-    }else if(ggcId=='美妆'){
+    }else if(ggcId==='美妆'){
       gc_id=470
     }else if(ggcId==='套装'){
       gc_id=3

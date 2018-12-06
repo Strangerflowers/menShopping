@@ -22,7 +22,7 @@ class News extends Component{
 							</div>
 						</div>
 						<div className="bottom">
-							<div><span>七天自动登陆</span><span><a href="#" >忘记密码?</a></span></div>
+							<div><span>七天自动登陆</span><span><a href="https://www.baidu.com" >忘记密码?</a></span></div>
 
 							<input type="button" value="登陆" />
 						</div>

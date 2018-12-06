@@ -24,7 +24,7 @@ const ReactSwiperExample = (props) => {
   const swiperOptions = {
     preloadImages: true,
     autoplay: 4000,
-    autoplayDisableOnInteraction: false
+    autoplayDisableOnInteraction: false 
   };
   return (
     <ReactSwiper swiperOptions={swiperOptions} showPagination items={items}
@@ -46,7 +46,7 @@ class Homecontent extends Component{
 	getData(){
 		axios.get('https://www.nanshig.com/mobile/index.php?act=index')
 		.then((res)=>{
-			console.log(res);
+			// console.log(res);
 			var data = res.data.datas;
 			var goods = [];
 			var banners = data[0].adv_list.item;

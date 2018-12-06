@@ -1,6 +1,6 @@
 import React from 'react';
 import Mheader from "../../components/Wheader.jsx";
-import GoodsListLess from "../../styles/goodslist.less";
+import "../../styles/goodslist.less";
 
 class GoodsList extends React.Component{
 	constructor(props){
@@ -26,7 +26,7 @@ class GoodsList extends React.Component{
 	sale(){
 		// https://www.nanshig.com/mobile/index.php?act=goods&op=goods_list&gc_id=264&page=10&curpage=1&gc_id=264&key=1&order=2
 		this.show();
-		var isShow=this.state.sale;
+		// var isShow=this.state.sale;
 		var classId=this.props.match.params.id;
 		var order =2
 		React.axios.get(`https://www.nanshig.com/mobile/index.php?act=goods&op=goods_list&gc_id=${classId}&page=10&curpage=1&gc_id=${classId}&key=1&order=${order}`)
@@ -89,7 +89,7 @@ class GoodsList extends React.Component{
 				<div className="goods-search-list-nav"> 
 				   	<ul id="nav_ul"> 
 					    <li>
-					    	<a href="javascript:void(0);" className="current" id="sort_default" onClick={()=>{
+					    	<a href="#" className="current" id="sort_default" onClick={()=>{
 					    		this.order();
 					    	}}>价格排序<i></i>
 					    	</a>
@@ -100,17 +100,17 @@ class GoodsList extends React.Component{
 					    	</div>*/}
 					    </li> 
 					    <li>
-					    	<a href="javascript:void(0);" className="" onClick={()=>{
+					    	<a href="#" className="" onClick={()=>{
 					    		this.sale();
 					    	}} >销量优先
 					    	</a>
 					    </li> 
 					    <li>
-					    	<a href="javascript:void(0);" id="search_adv">筛选<i></i></a>
+					    	<a href="#" id="search_adv">筛选<i></i></a>
 					    </li> 
 				   	</ul> 
 				   	<div className="browse-mode">
-				    	<a href="javascript:void(0);" id="show_style">
+				    	<a href="#" id="show_style">
 				    	<span className="browse-list"></span>
 				    	</a>
 				   	</div> 

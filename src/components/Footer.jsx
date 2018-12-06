@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import footerLess from '../styles/footer.less';
+import '../styles/footer.less';
 class Footer extends React.Component{
   constructor(props){
     super(props);
