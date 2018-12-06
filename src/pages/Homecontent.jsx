@@ -39,7 +39,7 @@ class Homecontent extends Component{
 		this.state = {
 			goodslist : [],
 			banner: [],
-			path: '/Details'
+			// path: '/Details'
 		}
 	}
 	// 获取页面数据

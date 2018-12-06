@@ -7,6 +7,8 @@ import Classify from './pages/classify/classify.jsx';
 import News from './pages/news/news.jsx';
 import User from './pages/user/user.jsx'; 
 import Detail from './pages/Details/details.jsx';
+import GoodsList from './pages/goodslist/goodslist.jsx';
+
 
 
 
@@ -18,14 +20,20 @@ class App extends Component {
 
       	<div className="App">
       		{/*<Redirect exact from='/' to='/home/'/>*/}
-          	<Route path="/home" exact component={Index} />
+          <Route path="/home" exact component={Index} />
         	<Route path="/cart/" component={Cart} />
+
           	<Route path="/classify/" component={Classify} />
           	<Route path="/news/" component={News} />
           	<Route path="/my/" component={User} />
-			<Route path = '/details/:id' component = {Detail} />
 			
 			
+
+          <Route path="/classify/" component={Classify} />
+          <Route path="/my/" component={User} />
+			    <Route path = '/details/:id' component = {Detail} />
+          <Route path="/goodslist/:id" component={GoodsList} />
+
       </div>
     );
   }

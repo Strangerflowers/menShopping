@@ -2,9 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import '../../styles/details.less';
 import Addcar from './addCar.jsx';
+import antd from 'antd';
 class Content extends React.Component{
 	constructor(props){
 		super(props)
+		console.log('props',props);
 		this.state={
 			goods: {},
 			bool: false,
