@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import '../../styles/news.less';
-
+import Footer from '../../components/Footer.jsx';
 
 class News extends Component{
 	render(){
@@ -9,7 +9,7 @@ class News extends Component{
 					<div className="header">
 						<div className="top">
 							<div className="homeimg">
-								<i className="iconfont icon-weixin"></i>
+								<i className="iconfont icon-home"></i>
 							</div>
 							<div className="gologin">登陆</div>
 						</div>
@@ -22,7 +22,7 @@ class News extends Component{
 							</div>
 						</div>
 						<div className="bottom">
-							<div><span>七天自动登陆</span><span><a href="#">忘记密码?</a></span></div>
+							<div><span>七天自动登陆</span><span><a href="#" >忘记密码?</a></span></div>
 
 							<input type="button" value="登陆" />
 						</div>
@@ -43,6 +43,7 @@ class News extends Component{
 						<input type="button" value="手机注册" />
 						
 					</div>
+					<Footer />
 				</div>
 			);
 	}

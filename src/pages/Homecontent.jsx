@@ -3,12 +3,13 @@ import '../styles/Homecontent.less';
 import axios from 'axios';
 // 路由跳转
 import { Link } from "react-router-dom"
-// import { Link } from "react-router-dom";
+
+import Footer from '../components/Footer.jsx';
 
 
 // 引入轮播图
 import ReactSwiper from 'reactjs-swiper';
-// import Detail from './Details/details.jsx';
+
 // 轮播图组件
 const ReactSwiperExample = (props) => {
 	// console.log(props);
@@ -104,7 +105,7 @@ class Homecontent extends Component{
 						})
 					})()
 				}
-				 
+				<Footer/>
 			</div>
 
 		);

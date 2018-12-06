@@ -1,12 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import '../../styles/details.less';
-// import Addcar from './addCar.jsx';
+import Addcar from './addCar.jsx';
 class Content extends React.Component{
 	constructor(props){
 		super(props)
 		this.state={
-			// goodsDetail: [{a:''}]
+			goods: {},
+			bool: false,
+			// goodsDetail: [{goods_name:'',goods_price:''}]
 			goodsDetail: [],
 			goodsname: '',
 			Text1 : '',
@@ -15,6 +17,7 @@ class Content extends React.Component{
 			miaosu: '',
 			fahuo : '',
 			fuwu : '',
+			b: "222222",
 			goodsList: []
 		}
 	}
@@ -23,7 +26,7 @@ class Content extends React.Component{
 		var currentId = this.props.match.params.id;
 		axios.get(`https://www.nanshig.com/mobile/index.php?act=goods&op=goods_detail&goods_id=${currentId}&key=`)
 		.then((res)=>{
-			console.log(res.data.datas);
+			var result = true; 
 			var data = res.data.datas;
 			var name = data.goods_info.goods_name;
 			var price = data.goods_info.goods_price;
@@ -39,18 +42,22 @@ class Content extends React.Component{
 			var goodslist = data.goods_commend_list;
 			console.log(data.goods_commend_list);
 			this.setState({
-				 goodsDetail : data,
-				 goodsname : name,
-				 goodsprice : price,
-				 Text1 : text1,
-				 Text2 : text2,
-				 Text3 : text3,
-				 miaosu : miaoS ,
-				 fahuo : faH,
-				 fuwu : fuW,
-				 goodsList : goodslist 
+				bool: result,
+				goods: data.goods_info,
+				goodsDetail : data,
+				goodsname : name,
+				goodsprice : price,
+				Text1 : text1,
+				Text2 : text2,
+				Text3 : text3,
+				miaosu : miaoS ,
+				fahuo : faH,
+				fuwu : fuW,
+				goodsList : goodslist 
 			})
+			console.log(22222,this.state.bool);
 			var a = data.goods_info.goods_spec;
+			console.log(111,this.state.goods);
 		})
 		.catch((err)=>{
 			console.log(err);
@@ -62,53 +69,95 @@ class Content extends React.Component{
 	render(){
 		return (
 			<div>
-				<div className="details">
-					<div className="con">
-						<div className="goods">
-							<div>
-								<img src={this.state.goodsDetail.goods_image} alt="" className="detailIMG"/>
+			{	
+				(()=>{
+					if(this.state.bool){
+                		return <div>
+							<div className="details">
+								<div className="con">
+									<div className="goods">
+										<div>
+											<img src={this.state.goodsDetail.goods_image} alt="" className="detailIMG"/>
+										</div>
+										<p className="title">{this.state.goodsname}</p>
+										<p className="price"><span>{this.state.goodsprice}</span><span>销量</span></p>
+										<p><span>{this.state.Text1}</span><span>{this.state.Text2}</span><span>{this.state.Text3}</span></p>
+										<p><span>已选</span><span>颜色</span><span>尺码</span></p>
+									</div>
+									<p className="evaluate">商品评价</p>
+									<div className="shop">
+										<p className="name">潮衣阁</p>
+										<p><span>{this.state.miaosu.text}</span>{this.state.miaosu.credit}<span>{this.state.fahuo.text}</span>{this.state.fahuo.credit}<span>{this.state.fuwu.text}</span>{this.state.fuwu.credit}</p>
+									</div>
+									<div className="goodslist">
+										<p>店铺推荐</p>
+										<ul>
+											{
+												(()=>{
+													return this.state.goodsList.map((item,index)=>{
+													return <li key={index}>
+																<img src={item.goods_image_url} alt="" />
+																<p>{item.goods_name}</p>
+																<span>{item.goods_promotion_price}</span>
+															</li>
+													})
+												})()
+											}
+										</ul>
+									</div>
+									<div className="more">查看更多</div>
+								</div>
 							</div>
-							<p className="title">{this.state.goodsname}</p>
-							<p className="price"><span>{this.state.goodsprice}</span><span>销量</span></p>
-							<p><span>{this.state.Text1}</span><span>{this.state.Text2}</span><span>{this.state.Text3}</span></p>
-							<p><span>已选</span><span>颜色</span><span>尺码</span></p>
+							<Addcar goods={this.state.goods}/>
 						</div>
-						<p className="evaluate">商品评价</p>
-						<div className="shop">
-							<p className="name">潮衣阁</p>
-							<p><span>{this.state.miaosu.text}</span>{this.state.miaosu.credit}<span>{this.state.fahuo.text}</span>{this.state.fahuo.credit}<span>{this.state.fuwu.text}</span>{this.state.fuwu.credit}</p>
-						</div>
-						<div className="goodslist">
-							<p>店铺推荐</p>
-							<ul>
-								{
-									(()=>{
-										return this.state.goodsList.map((item,index)=>{
-										return <li key={index}>
-													<img src={item.goods_image_url} alt="" />
-													<p>{item.goods_name}</p>
-													<span>{item.goods_promotion_price}</span>
-												</li>
-										})
-									})()
-								}
-							</ul>
-						</div>
-						<div className="more">查看更多</div>
-					</div>
-				</div>
-				{/*
-				<div className="footer">
-					<div className="service">客服</div>
-					<div className="car">购物车</div>
-					<div className="buy">立即购买</div>
-					<div className="aadCar">加入购物车</div>
-				</div>
-				*/}
-				
+					}
+				})()
+			}
 			</div>
 		)
 	}
+
 }
 export default Content;
-	// <Addcar />
+
+
+// return (
+// <div>
+// 	<div className="details">
+// 		<div className="con">
+// 			<div className="goods">
+// 				<div>
+// 					<img src={this.state.goodsDetail.goods_image} alt="" className="detailIMG"/>
+// 				</div>
+// 				<p className="title">{this.state.goodsname}</p>
+// 				<p className="price"><span>{this.state.goodsprice}</span><span>销量</span></p>
+// 				<p><span>{this.state.Text1}</span><span>{this.state.Text2}</span><span>{this.state.Text3}</span></p>
+// 				<p><span>已选</span><span>颜色</span><span>尺码</span></p>
+// 			</div>
+// 			<p className="evaluate">商品评价</p>
+// 			<div className="shop">
+// 				<p className="name">潮衣阁</p>
+// 				<p><span>{this.state.miaosu.text}</span>{this.state.miaosu.credit}<span>{this.state.fahuo.text}</span>{this.state.fahuo.credit}<span>{this.state.fuwu.text}</span>{this.state.fuwu.credit}</p>
+// 			</div>
+// 			<div className="goodslist">
+// 				<p>店铺推荐</p>
+// 				<ul>
+// 					{
+// 						(()=>{
+// 							return this.state.goodsList.map((item,index)=>{
+// 							return <li key={index}>
+// 										<img src={item.goods_image_url} alt="" />
+// 										<p>{item.goods_name}</p>
+// 										<span>{item.goods_promotion_price}</span>
+// 									</li>
+// 							})
+// 						})()
+// 					}
+// 				</ul>
+// 			</div>
+// 			<div className="more">查看更多</div>
+// 		</div>
+// 	</div>
+// 	<Addcar goods={this.state.goods}/>
+// </div>
+// )

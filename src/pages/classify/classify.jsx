@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import classifyLess from "../../styles/classify.less";
 import Mheader from "../../components/Wheader.jsx";
-import { Link } from "react-router-dom";
+import Footer from '../../components/Footer.jsx';
+// import { Link } from "react-router-dom";
 
 class Classify extends Component {
   constructor(props) {
@@ -196,6 +197,7 @@ class Classify extends Component {
             </ul>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }

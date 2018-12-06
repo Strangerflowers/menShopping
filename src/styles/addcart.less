@@ -4,11 +4,54 @@
 	margin: 0;
 }
 .addcart{
-	height: 1103px;
+	height: 100%;
     width: 100%;
     div{
+    	border-top: 1px solid #ccc;
+    	span{
+    		display: inline-block;
+    		.padding(0,22,0,22.5);
+			.lh(44);
+			.fs(14);
+			background: #eee;
+			float: left;
+    	}
+    	button{
+    		border: 0 none;
+    		.padding(0,0,0,0);
+    		float: left;
+    		span{
+    			display: inline-block;
+    		.padding(0,22,0,22);
+			.lh(44);
+			.fs(14);background: #FB6E52;
+			// background: #eee;
+			float: left;
+			color: #fff;
+			.h(44);
+    		}
+    		
+    	}
+    	.buy{
+    		span{
+    			background: #ff5001;
+    		}	
+		}
     	position: fixed;
-	    bottom: 44px;
-	    width: 100%;
+	    bottom: 0;
+	    .h(44);
+	    width: 100%;   
+		.service{
+			border-right: 1px solid #DDD;
+			.h(44);
+		}
+		
     }
+}
+.ant-drawer-content-wrapper{
+	// .ant-drawer-wrapper-body{
+		.h(322);
+		// z-index: 9999;
+	// }
+	
 }
