@@ -1,5 +1,5 @@
 import React from "react";
-import headerLess from '../styles/header.less';
+import '../styles/header.less';
 
 
 class Mheader extends React.Component{

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import classifyLess from "../../styles/classify.less";
+import "../../styles/classify.less";
 import Mheader from "../../components/Wheader.jsx";
-import { Link } from "react-router-dom";
+import { Link,NavLink } from "react-router-dom";
 
 class Classify extends Component {
   constructor(props) {
@@ -11,7 +11,8 @@ class Classify extends Component {
       cards: [],
       class_list: [],
       goods_list: [],
-      nav: ''
+      nav: '',
+      index:''
     };
   }
   getData() {
@@ -31,7 +32,6 @@ class Classify extends Component {
   }
   getClassData() {
 
-    // https://www.nanshig.com/mobile/index.php?act=goods_class&op=get_child_all&gc_id=256
     React.axios
       .get(
         "https://www.nanshig.com/mobile/index.php?act=goods_class&op=get_child_all&gc_id=256"
@@ -48,7 +48,6 @@ class Classify extends Component {
         console.log(error);
       });
   }
-  // https://www.nanshig.com/mobile/index.php?act=goods&op=goods_list&gc_id=256&page=20
   getGoodData() {
     React.axios
       .get(
@@ -66,13 +65,21 @@ class Classify extends Component {
       });
   }
 
-  navigateTo(e) {
+
+  navigateTo(e,index) {
+
+    this.setState({
+      index:index
+    })
+    console.log(this.state.index==index)
+
 		let ggcId = e.target.innerHTML;
 		let gc_id;
 
 		console.log('e======', e.target.innerHTML)
 		if(ggcId === '上装') {
-			gc_id = 256
+			gc_id = 256;
+
 		}else if (ggcId === '下装') {
 			gc_id = 2
 		}else if(ggcId=='鞋靴'){
@@ -90,10 +97,10 @@ class Classify extends Component {
         // console.log(res);
         this.setState({
           class_list: res.data.datas.class_list[0].child,
-          nav:res.data.datas.class_list[0].gc_name
-
+          nav:res.data.datas.class_list[0].gc_name,
+          // index:index
         });
-        // console.log(this.state.class_list);
+        // console.log(this.state.index);
       })
       .catch(error => {
         console.log(error);
@@ -114,8 +121,6 @@ class Classify extends Component {
         console.log(error);
       });
 	}
-//   https://www.nanshig.com/mobile/index.php?act=goods&op=goods_list&gc_id=264&page=10&curpage=1&gc_id=264
-// https://www.nanshig.com/mobile/index.php?act=goods&op=goods_list&gc_id=268&page=10&curpage=1&gc_id=268
 
 
   componentDidMount() {
@@ -132,15 +137,16 @@ class Classify extends Component {
             {(() => {
               return this.state.cards.map((item, index) => {
                 return (
-                  <li key={index} className="category-item selected">
+                  <li key={index} className="category-item selected" >
                     <div
                       onClick={e => {
-                        this.navigateTo(e);
+                        this.navigateTo(e,index);
                       }}
-                      className=" category-item-a category"
+                      className=" category-item-a category "
+                      className={this.state.index==index ?"sele ":""}
                     >
                       <div className="ci-fcategory-ico"> </div>
-                      <div className="ci-fcategory-name ggcId">
+                      <div className="ci-fcategory-name ggcId" >
                         {item.gc_name}
                       </div>
                     </div>
@@ -183,16 +189,19 @@ class Classify extends Component {
                 return this.state.goods_list.map((item, index) => {
                   return (
                     <li key={index}>
-                      <div className="good_img">
-                        <img src={item.goods_image_url} alt="" />
-                      </div>
-                      <div className="good_tip">
-                        <p className="good_title">{item.goods_name}</p>
-                        <p className="good_price">
-                          <span> ￥</span>
-                          <span>{item.goods_price}</span>
-                        </p>
-                      </div>
+                     <Link to={`/details/${item.goods_id}/`}>
+                        <div className="good_img">
+                          <img src={item.goods_image_url} alt="" />
+                        </div>
+                        <div className="good_tip">
+                          <p className="good_title">{item.goods_name}</p>
+                          <p className="good_price">
+                            <span> ￥</span>
+                            <span>{item.goods_price}</span>
+                          </p>
+                        </div>
+                    </Link>
+                      
                     </li>
                   );
                 });

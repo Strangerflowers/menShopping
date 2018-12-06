@@ -1,174 +1,292 @@
+<!-- <!DOCTYPE html>
+  <html>
+  <head>
+    <title></title>
+    <style type="text/css">
+  
+    </style>
+  </head>
+  <body>
+      <canvas width="600" height="600" id="canvas"></canvas>
+  </body>
+  <script type="text/javascript">
+      var canvas = document.getElementById('canvas');
+var cxt = canvas.getContext('2d');
+
+var timer;
+var gravity = 1;
+var buffer = 5;
+
+var iStop = false;
+
+var boxes = [
+{'startSpeed':-20,'currentSpeed':-20,'boxTop':500,'boxLeft':0},
+{'startSpeed':-10,'currentSpeed':-10,'boxTop':500,'boxLeft':100},
+{'startSpeed':-30,'currentSpeed':-30,'boxTop':500,'boxLeft':200},
+{'startSpeed':-10,'currentSpeed':-10,'boxTop':500,'boxLeft':300},
+{'startSpeed':-20,'currentSpeed':-20,'boxTop':500,'boxLeft':400}
+];
+
+function draw(){
+for(var i=0; i<boxes.length; i++){
+boxes[i].currentSpeed += gravity;
+boxes[i].boxTop += boxes[i].currentSpeed;
+if(boxes[i].boxTop > 500){
+boxes[i].boxTop -= boxes[i].currentSpeed;
+}
+
+cxt.fillRect(boxes[i].boxLeft, boxes[i].boxTop, 100, 100);
+if(boxes[i].boxTop >= 500){
+boxes[i].startSpeed += buffer;
+boxes[i].currentSpeed = boxes[i].startSpeed;
+}
+}
+}
+
+function erase(){
+cxt.clearRect(0, 0, 600, 600);
+}
+
+window.requestAnimationFrame =
+window.requestAnimationFrame ||
+window.mozRequestAnimationFrame ||
+window.webkitRequestAnimationFrame ||
+window.msRequestAnimationFrame;
+
+window.cancelRequestAnimationFrame =
+window.cancelRequestAnimationFrame ||
+window.mozCancelRequestAnimationFrame ||
+window.webkitCancelRequestAnimationFrame ||
+window.msCancelRequestAnimationFrame;
+
+function animate() {
+erase();
+draw();
+
+if(iStop){
+cancelRequestAnimationFrame(timer);
+}else{
+timer = requestAnimationFrame(animate);
+}
+}
+
+animate();
+  </script>
+  </html>  
+
+
+
+ -->
+
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>hangge.com</title>
+<style>
+canvas {
+cursor: pointer;
+border: 1px solid black;
+}
+</style>
+<script>
+// 用于表示球的所有细节的Ball函数
+function Ball(x, y, dx, dy, radius) {
+this.x = x;
+this.y = y;
+this.dx = dx;
+this.dy = dy;
+this.radius = radius;
+this.strokeColor = "black";
+this.fillColor = "red";
+}
+
+// 这个数组用于保存画布上出现的所有球
+var balls = [];
+
+var canvas;
+var context;
+
+window.onload = function() {
+canvas = document.getElementById("canvas");
+context = canvas.getContext("2d");
+canvas.onmousedown = canvasClick;
+// 每0.02秒绘制一次画布
+setTimeout(drawFrame, 20);
+};
+
+function addBall() {
+// 小球半径
+var radius = 20;
+// 创建新的ball对象
+var ball = new Ball(50,50,1,1,radius);
+// 将其保存在balls数组中
+balls.push(ball);
+}
+
+function clearBalls() {
+// 删除所有球对象
+balls = [];
+}
+
+function drawFrame() {
+// 清除画布
+context.clearRect(0, 0, canvas.width, canvas.height);
+
+context.beginPath();
+
+// 循环所有的球
+for(var i=0; i<balls.length; i++) {
+// 把每个球移动到新的位置
+var ball = balls[i];
+ball.x += ball.dx;
+ball.y += ball.dy;
+
+// 添加重力作用的效果，让球加速下落
+if ((ball.y) < canvas.height) ball.dy += 0.22;
+// 添加摩擦力作用的效果，减慢左右移动速度
+ball.dx = ball.dx * 0.998;
+// 如果球碰到某一边，就反弹回来
+if ((ball.x + ball.radius > canvas.width) || (ball.x - ball.radius < 0)) {
+ball.dx = -ball.dx;
+}
+// 如果球碰到底部，反弹回来，但慢慢地减速
+if ((ball.y + ball.radius > canvas.height) || (ball.y - ball.radius < 0)) {
+ball.dy = -ball.dy*0.96;
+}
+
+context.beginPath();
+context.fillStyle = ball.fillColor; 
+
+// 绘制球
+context.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);
+context.lineWidth = 1;
+context.fill();
+context.stroke();
+}
+
+// 20毫秒后绘制下一帧
+setTimeout(drawFrame, 20);
+}
+
+function canvasClick(e) {
+// 获取点击的坐标
+var clickX = e.pageX - canvas.offsetLeft;
+var clickY = e.pageY - canvas.offsetTop;
+
+// 找到点中的小球
+for(var i in balls)
+{
+var ball = balls[i];
+if ((clickX > (ball.x-ball.radius)) && (clickX < (ball.x+ball.radius)))
+{
+if ((clickY > (ball.y-ball.radius)) && (clickY < (ball.y+ball.radius)))
+{
+// 改变点击的小球速度
+ball.dx -= 2;
+ball.dy -= 3;
+return;
+}
+}
+}
+}
+</script>
+</head>
+<body>
+<canvas id="canvas" width="400" height="300">
+</canvas>
+<div>
+<button onclick="addBall()">添加小球</button>
+<button onclick="clearBalls()">清空画布</button>
+</div>
+</body>
+</html>
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <html>
  <head></head>
  <body>
-  <div className="nctouch-main-layout mt40 mb20"> 
-   <div id="product_list" className="list"> 
-    <ul className="goods-secrch-list"> 
-     <li className="goods-item" goods_id="224730"> <span className="goods-pic"> <a href="product_detail.html?goods_id=224730"> <img src="https://www.nanshig.com/data/upload/shop/store/goods/2/2_05596095731346187_360.jpg" /> </a> </span> 
-      <dl className="goods-info"> 
-       <dt className="goods-name"> 
-        <a href="product_detail.html?goods_id=224730"> <h4>时尚潮流百搭基本款 拼接分割宽松长袖衬衫 白色 M</h4> <h6></h6> </a> 
-       </dt> 
-       <dd className="goods-sale"> 
-        <a href="product_detail.html?goods_id=224730"> <span className="goods-price">￥<em>119.00</em> </span> </a> 
-       </dd> 
-       <dd className="goods-assist"> 
-        <a href="product_detail.html?goods_id=224730"> <span className="goods-sold">销量 <em>3</em> </span> </a> 
-        <div className="goods-store"> 
-         <a href="javascript:void(0);" data-id="">李木子的小店<i></i></a> 
-         <div className="sotre-creidt-layout" style="display: none;"></div> 
+  <div className="nctouch-main-layout"> 
+   <div id="cart-list-wp"> 
+    <div className="nctouch-cart-container"> 
+     <dl className="nctouch-cart-store"> 
+      <dt>
+       <span className="store-check"> <input className="store_checkbox" type="checkbox" checked="" /> </span> 
+       <i className="icon-store"></i> 潮男搭配师 
+      </dt> 
+     </dl> 
+     <ul className="nctouch-cart-item"> 
+      <li cart_id="226254" className="cart-litemw-cnt"> 
+       <div className="goods-check"> 
+        <input type="checkbox" checked="" name="cart_id" value="226254" /> 
+       </div> 
+       <div className="goods-pic"> 
+        <a href="https://www.nanshig.com/wap/tmpl/product_detail.html?goods_id=226254"> <img src="https://www.nanshig.com/data/upload/shop/store/goods/45/45_05906246257217290_360.jpg" /> </a> 
+       </div> 
+       <dl className="goods-info"> 
+        <dt className="goods-name"> 
+         <a href="https://www.nanshig.com/wap/tmpl/product_detail.html?goods_id=226254"> 2018新款加厚加绒棉袄冬季男士外套个性棉衣修身韩版棉服潮流帅气 黑色 L </a>
+        </dt> 
+
+       </dl> 
+       <div className="goods-del" cart_id="226254">
+        <a href="javascript:void(0);"></a>
+       </div> 
+       <div className="goods-subtotal"> 
+        <span className="goods-price">￥<em>128.00</em></span> 
+        <span className="goods-sale"> </span> 
+        <div className="value-box"> 
+         <span className="minus"> <a href="javascript:void(0);">&nbsp;</a> </span> 
+         <span> <input type="text" pattern="[0-9]*" readonly="" className="buy-num buynum" value="3" /> </span> 
+         <span className="add"> <a href="javascript:void(0);">&nbsp;</a> </span> 
         </div> 
-       </dd> 
-      </dl> </li> 
-     <li className="goods-item" goods_id="224513"> <span className="goods-pic"> <a href="product_detail.html?goods_id=224513"> <img src="https://www.nanshig.com/data/upload/shop/store/goods/34/34_05595673083090341_360.jpg" /> </a> </span> 
-      <dl className="goods-info"> 
-       <dt className="goods-name"> 
-        <a href="product_detail.html?goods_id=224513"> <h4>秋装新款韩版修身版男士纯棉长袖格子衬衫时尚休闲中袖棉麻衬衣潮 灰色 M</h4> <h6></h6> </a> 
-       </dt> 
-       <dd className="goods-sale"> 
-        <a href="product_detail.html?goods_id=224513"> <span className="goods-price">￥<em>92.00</em> </span> </a> 
-       </dd> 
-       <dd className="goods-assist"> 
-        <a href="product_detail.html?goods_id=224513"> <span className="goods-sold">销量 <em>3</em> </span> </a> 
-        <div className="goods-store"> 
-         <a href="javascript:void(0);" data-id="">衣品家<i></i></a> 
-         <div className="sotre-creidt-layout" style="display: none;"></div> 
-        </div> 
-       </dd> 
-      </dl> </li> 
-     <li className="goods-item" goods_id="224493"> <span className="goods-pic"> <a href="product_detail.html?goods_id=224493"> <img src="https://www.nanshig.com/data/upload/shop/store/goods/34/34_05595669503333410_360.jpg" /> </a> </span> 
-      <dl className="goods-info"> 
-       <dt className="goods-name"> 
-        <a href="product_detail.html?goods_id=224493"> <h4>秋装新款韩版修身版男士纯棉长袖格子衬衫时尚休闲中袖棉麻衬衣潮 蓝色 M</h4> <h6></h6> </a> 
-       </dt> 
-       <dd className="goods-sale"> 
-        <a href="product_detail.html?goods_id=224493"> <span className="goods-price">￥<em>95.00</em> </span> </a> 
-       </dd> 
-       <dd className="goods-assist"> 
-        <a href="product_detail.html?goods_id=224493"> <span className="goods-sold">销量 <em>0</em> </span> </a> 
-        <div className="goods-store"> 
-         <a href="javascript:void(0);" data-id="">衣品家<i></i></a> 
-         <div className="sotre-creidt-layout" style="display: none;"></div> 
-        </div> 
-       </dd> 
-      </dl> </li> 
-     <li className="goods-item" goods_id="224477"> <span className="goods-pic"> <a href="product_detail.html?goods_id=224477"> <img src="https://www.nanshig.com/data/upload/shop/store/goods/34/34_05595656165940031_360.jpg" /> </a> </span> 
-      <dl className="goods-info"> 
-       <dt className="goods-name"> 
-        <a href="product_detail.html?goods_id=224477"> <h4>秋装新款韩版宽松版男士纯棉长袖格子衬衫时尚休闲绣花棉麻衬衣潮 蓝色 M</h4> <h6></h6> </a> 
-       </dt> 
-       <dd className="goods-sale"> 
-        <a href="product_detail.html?goods_id=224477"> <span className="goods-price">￥<em>98.00</em> </span> </a> 
-       </dd> 
-       <dd className="goods-assist"> 
-        <a href="product_detail.html?goods_id=224477"> <span className="goods-sold">销量 <em>0</em> </span> </a> 
-        <div className="goods-store"> 
-         <a href="javascript:void(0);" data-id="">衣品家<i></i></a> 
-         <div className="sotre-creidt-layout" style="display: none;"></div> 
-        </div> 
-       </dd> 
-      </dl> </li> 
-     <li className="goods-item" goods_id="224441"> <span className="goods-pic"> <a href="product_detail.html?goods_id=224441"> <img src="https://www.nanshig.com/data/upload/shop/store/goods/34/34_05595640633295362_360.jpg" /> </a> </span> 
-      <dl className="goods-info"> 
-       <dt className="goods-name"> 
-        <a href="product_detail.html?goods_id=224441"> <h4>秋装新款韩版宽松版男士纯棉长袖衬衫时尚条纹休闲百搭棉麻衬衣潮 浅蓝色 M</h4> <h6></h6> </a> 
-       </dt> 
-       <dd className="goods-sale"> 
-        <a href="product_detail.html?goods_id=224441"> <span className="goods-price">￥<em>98.00</em> </span> </a> 
-       </dd> 
-       <dd className="goods-assist"> 
-        <a href="product_detail.html?goods_id=224441"> <span className="goods-sold">销量 <em>0</em> </span> </a> 
-        <div className="goods-store"> 
-         <a href="javascript:void(0);" data-id="">衣品家<i></i></a> 
-         <div className="sotre-creidt-layout" style="display: none;"></div> 
-        </div> 
-       </dd> 
-      </dl> </li> 
-     <li className="goods-item" goods_id="224429"> <span className="goods-pic"> <a href="product_detail.html?goods_id=224429"> <img src="https://www.nanshig.com/data/upload/shop/store/goods/34/34_05595635820974468_360.jpg" /> </a> </span> 
-      <dl className="goods-info"> 
-       <dt className="goods-name"> 
-        <a href="product_detail.html?goods_id=224429"> <h4>秋装新款韩版宽松版男士纯棉长袖条纹衬衫时尚休闲绣花棉麻衬衣潮 灰色 M</h4> <h6></h6> </a> 
-       </dt> 
-       <dd className="goods-sale"> 
-        <a href="product_detail.html?goods_id=224429"> <span className="goods-price">￥<em>99.00</em> </span> </a> 
-       </dd> 
-       <dd className="goods-assist"> 
-        <a href="product_detail.html?goods_id=224429"> <span className="goods-sold">销量 <em>1</em> </span> </a> 
-        <div className="goods-store"> 
-         <a href="javascript:void(0);" data-id="">衣品家<i></i></a> 
-         <div className="sotre-creidt-layout" style="display: none;"></div> 
-        </div> 
-       </dd> 
-      </dl> </li> 
-     <li className="goods-item" goods_id="224393"> <span className="goods-pic"> <a href="product_detail.html?goods_id=224393"> <img src="https://www.nanshig.com/data/upload/shop/store/goods/34/34_05595621785551049_360.jpg" /> </a> </span> 
-      <dl className="goods-info"> 
-       <dt className="goods-name"> 
-        <a href="product_detail.html?goods_id=224393"> <h4>2017新款韩版修身潮纯棉男士长袖衬衫青少年时尚条纹休闲棉麻衬衣 白色 M</h4> <h6></h6> </a> 
-       </dt> 
-       <dd className="goods-sale"> 
-        <a href="product_detail.html?goods_id=224393"> <span className="goods-price">￥<em>95.00</em> </span> </a> 
-       </dd> 
-       <dd className="goods-assist"> 
-        <a href="product_detail.html?goods_id=224393"> <span className="goods-sold">销量 <em>1</em> </span> </a> 
-        <div className="goods-store"> 
-         <a href="javascript:void(0);" data-id="">衣品家<i></i></a> 
-         <div className="sotre-creidt-layout" style="display: none;"></div> 
-        </div> 
-       </dd> 
-      </dl> </li> 
-     <li className="goods-item" goods_id="224371"> <span className="goods-pic"> <a href="product_detail.html?goods_id=224371"> <img src="https://www.nanshig.com/data/upload/shop/store/goods/16/16_05588307373372296_360.jpg" /> </a> </span> 
-      <dl className="goods-info"> 
-       <dt className="goods-name"> 
-        <a href="product_detail.html?goods_id=224371"> <h4>秋季新款韩版宽松长袖衬衫男翻领小外套 条纹衬衣 红色 M</h4> <h6></h6> </a> 
-       </dt> 
-       <dd className="goods-sale"> 
-        <a href="product_detail.html?goods_id=224371"> <span className="goods-price">￥<em>89.00</em> </span> </a> 
-       </dd> 
-       <dd className="goods-assist"> 
-        <a href="product_detail.html?goods_id=224371"> <span className="goods-sold">销量 <em>2</em> </span> </a> 
-        <div className="goods-store"> 
-         <a href="javascript:void(0);" data-id="">尚潮男士专卖<i></i></a> 
-         <div className="sotre-creidt-layout" style="display: none;"></div> 
-        </div> 
-       </dd> 
-      </dl> </li> 
-     <li className="goods-item" goods_id="224365"> <span className="goods-pic"> <a href="product_detail.html?goods_id=224365"> <img src="https://www.nanshig.com/data/upload/shop/store/goods/16/16_05588301934168084_360.jpg" /> </a> </span> 
-      <dl className="goods-info"> 
-       <dt className="goods-name"> 
-        <a href="product_detail.html?goods_id=224365"> <h4>黑白条纹衬衫男长袖修身潮流帅气百搭韩版bf日系复古港风2017新款 黑色 M</h4> <h6></h6> </a> 
-       </dt> 
-       <dd className="goods-sale"> 
-        <a href="product_detail.html?goods_id=224365"> <span className="goods-price">￥<em>98.00</em> </span> </a> 
-       </dd> 
-       <dd className="goods-assist"> 
-        <a href="product_detail.html?goods_id=224365"> <span className="goods-sold">销量 <em>1</em> </span> </a> 
-        <div className="goods-store"> 
-         <a href="javascript:void(0);" data-id="">尚潮男士专卖<i></i></a> 
-         <div className="sotre-creidt-layout" style="display: none;"></div> 
-        </div> 
-       </dd> 
-      </dl> </li> 
-     <li className="goods-item" goods_id="224272"> <span className="goods-pic"> <a href="product_detail.html?goods_id=224272"> <img src="https://www.nanshig.com/data/upload/shop/store/goods/32/32_05588072406831703_360.jpg" /> </a> </span> 
-      <dl className="goods-info"> 
-       <dt className="goods-name"> 
-        <a href="product_detail.html?goods_id=224272"> <h4>条纹宽松套头短袖衬衫男青年休闲薄款七分袖衬衣 黑色 M(偏大）</h4> <h6></h6> </a> 
-       </dt> 
-       <dd className="goods-sale"> 
-        <a href="product_detail.html?goods_id=224272"> <span className="goods-price">￥<em>99.00</em> </span> </a> 
-       </dd> 
-       <dd className="goods-assist"> 
-        <a href="product_detail.html?goods_id=224272"> <span className="goods-sold">销量 <em>2</em> </span> </a> 
-        <div className="goods-store"> 
-         <a href="javascript:void(0);" data-id="">原创潮服<i></i></a> 
-         <div className="sotre-creidt-layout" style="display: none;"></div> 
-        </div> 
-       </dd> 
-      </dl> </li> 
-     <li className="loading">
-      <div className="spinner">
-       <i></i>
-      </div>商品数据读取中...</li> 
-    </ul> 
+       </div> </li> 
+     </ul> 
+    </div> 
+    <div className="nctouch-cart-bottom no-login"> 
+     <div className="cart-nologin-tip">
+      结算购物车中的商品，需先登录商城
+     </div> 
+     <div className="cart-nologin-btn">
+      <a href="../tmpl/member/login.html" className="btn">登录</a> 
+      <a href="../tmpl/member/register.html" className="btn">注册</a> 
+     </div> 
+    </div> 
    </div> 
   </div>
  </body>

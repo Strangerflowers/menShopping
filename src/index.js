@@ -6,11 +6,7 @@ import { HashRouter as Router} from "react-router-dom";
 import { Toast } from 'antd-mobile';
 import '../node_modules/antd-mobile/dist/antd-mobile.css'
 
-// import axios from 'axios'; 
-// import './styles/index.css';
-// import './styles/base.css';
-// import './styles/cards.css';
-// import './styles/App.css'; 
+
 import axios from 'axios';
 import App from './App';
 
