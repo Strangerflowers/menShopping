@@ -124,11 +124,6 @@ class Addcart extends React.Component {
     );
   }
 }
-   // {
-   //            (()=>{
-   //              return 
-   //            })
-   //          }
 export default Addcart; 
 
 
