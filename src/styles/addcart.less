@@ -65,7 +65,7 @@
 		.goods{
 			border-bottom: 1px solid #eee;
 			.goodscon{
-				background: #ccc;
+				// background: #ccc;
 				.h(90);
 				.padding(12,12,12,12);
 				width: 100%;
@@ -75,9 +75,16 @@
 					float: left;
 				}
 				div{
-					float: left;
+					// float: left;
 					p{
-						.padding(3,7,7,12);
+						.padding(0,7,7,12);
+						span{
+							color: red;
+						}
+						.fRight{
+							color: #000;
+							float: right;
+						}
 					}
 				}
 			}
@@ -100,7 +107,28 @@
 		.buynum{
 			.h(46);
 			width: 100%;
-		}
+			border-top: 1px solid #eee;
+			border-bottom: 1px solid #eee;
+			.fRight{
+				float: right;
+			}
+			p{
+				border-radius: 10%;
+				display: inline;
+				.lh(45);
+				.padding(0,10,0,10);
+				span{
+					display: inline-block;
+					.w(30);
+					.h(30);
+					.lh(30);
+					text-align: center;
+					border: 1px solid #ccc;
+					.margin(6,0,0,0);
+				}
+				
+			}
+		} 
 		.footer{
 			border: 0 none;
 		}
@@ -112,6 +140,37 @@
 		}
 	}	
 }
-.A{
-	.h(500);
+.active{
+	background: #ff5001;
 }
+
+
+
+// 遮罩层样式
+.bottom{
+	z-index: 999;
+		.h(44);
+		border-top: 1px solid #DDD;
+		width: 100%;
+		position: fixed;
+		bottom: 0;
+		background: #fff;
+		div{
+			.padding(0,22,0,22.5);
+			.lh(44);
+			.fs(14);
+			background: #eee;
+			float: left;
+		}
+		.service{
+			border-right: 1px solid #DDD;
+		}
+		.buy{
+			color: #fff;
+			background: #ff5001;
+		}
+		.addCar{
+			background: #FB6E52;
+			color: #fff;
+		}
+	}

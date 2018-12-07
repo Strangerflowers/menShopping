@@ -19,7 +19,9 @@ class Content extends React.Component{
 			fahuo : '',
 			fuwu : '',
 			b: "222222",
-			goodsList: []
+			goodsList: [],
+			goodsCon: [],
+			show: false
 		}
 	}
 	// 获取数据
@@ -27,6 +29,14 @@ class Content extends React.Component{
 		var currentId = this.props.match.params.id;
 		axios.get(`https://www.nanshig.com/mobile/index.php?act=goods&op=goods_detail&goods_id=${currentId}&key=`)
 		.then((res)=>{
+			console.log(res.data.datas.goods_info.goods_spec);
+			var goodsSize = res.data.datas.goods_info.goods_spec;
+			var goodsColor = []
+			for(var key in goodsSize){
+				goodsColor.push(goodsSize[key]);
+
+			}
+			console.log(goodsColor);
 			var result = true; 
 			var data = res.data.datas;
 			var name = data.goods_info.goods_name;
@@ -43,7 +53,7 @@ class Content extends React.Component{
 			this.setState({
 				bool: result,
 				goods: goodsdata,
-				goodsDetail : data,
+				goodsDetail : data, 
 				goodsname : name,
 				goodsprice : price,
 				Text1 : text1,
@@ -52,7 +62,8 @@ class Content extends React.Component{
 				miaosu : miaoS ,
 				fahuo : faH,
 				fuwu : fuW,
-				goodsList : goodslist 
+				goodsList : goodslist,
+				goodsCon: goodsColor
 			})
 			// console.log(22222,this.state.bool);
 			// console.log(111,this.state.goods);
@@ -61,16 +72,44 @@ class Content extends React.Component{
 			console.log(err);
 		})
 	}
+	showTop(){
+		var a =true;
+		if(window.scrollY>=100){
+
+			a=true;
+			this.setState({
+				show: a
+			})
+		}else{
+			a=false
+			this.setState({
+				show: a
+			})
+		}
+		// this.setState({
+		// 	show: a
+		// })
+		// this.setState({
+		// 	show : true 
+		// })
+		console.log(1111);
+	}
 	componentWillMount(){
 		this.getData();
+		// this.showTop();
+		// window.addEventListener('scroll',this.showTop)
 	}
+	 componentDidMount(){
+	 	window.addEventListener('scroll',this.showTop.bind(this))
+	 }
 	render(){
 		return (
 			<div>
         		 <div>
 					<div className="details">
-				{/*<div className="top">1111</div>*/}
+					{this.state.show?<div className="top">1111</div>:null}
 
+				
 						<div className="goodsImg">
 							<img src={this.state.goodsDetail.goods_image} alt="" className="detailIMG"/>
 						</div>
@@ -84,7 +123,16 @@ class Content extends React.Component{
 								<p className="title">{this.state.goodsname}</p>
 								<p className="price"><span>{this.state.goodsprice}</span><span>销量</span></p>
 								<p><span>{this.state.Text1}</span><span>{this.state.Text2}</span><span>{this.state.Text3}</span></p>
-								<p><span>已选</span><span>颜色</span><span>尺码</span></p>
+								<p>
+									<span>已选</span>
+									{
+										(()=>{
+											return this.state.goodsCon.map((item,index)=>{
+												return 	<span>{item}</span>
+											})
+										})()
+									}
+									</p>
 							</div>
 							<p className="evaluate">商品评价</p>
 							<div className="shop">
