@@ -15,7 +15,9 @@ class App extends Component {
       	<div className="App">
       		{/*<Redirect exact from='/' to='/home/'/>*/}
       		<Switch>
+
           <Route path="/home/"  component={Index} />
+
         	<Route path="/cart/" component={Cart} />
 
           	<Route path="/classify/" component={Classify} />
@@ -34,5 +36,3 @@ class App extends Component {
 }
 
 export default App;
-
- // <Footer/>
