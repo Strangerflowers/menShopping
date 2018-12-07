@@ -1,11 +1,13 @@
 import React from 'react';
 import Mheader from "../../components/Wheader.jsx";
 import "../../styles/goodslist.less";
+
 import LazyLoad from 'react-lazyload';
-import Scroll from 'react-bscroll';
+// import Scroll from 'react-bscroll';
 import InfiniteLoader from 'react-infinite-loader'
-import 'react-bscroll/lib/react-scroll.css';
+// import 'react-bscroll/lib/react-scroll.css';
 import { Link } from "react-router-dom";
+
 
 class GoodsList extends React.Component{
 	constructor(props){
@@ -32,7 +34,7 @@ class GoodsList extends React.Component{
 	sale(){
 		// https://www.nanshig.com/mobile/index.php?act=goods&op=goods_list&gc_id=264&page=10&curpage=1&gc_id=264&key=1&order=2
 		this.show();
-		var isShow=this.state.sale;
+		// var isShow=this.state.sale;
 		var classId=this.props.match.params.id;
 		var order =2
 		React.axios.get(`https://www.nanshig.com/mobile/index.php?act=goods&op=goods_list&gc_id=${classId}&page=10&curpage=1&gc_id=${classId}&key=1&order=${order}`)
@@ -116,7 +118,8 @@ class GoodsList extends React.Component{
 	render(){
 		// const {scrollHeight} = this.state;
 		return (
-			 <LazyLoad>
+
+			 // <LazyLoad>
 		       <div className='goodslist' >
 						<Mheader />
 							<div className="goods-search-list-nav  header" onScroll={()=>{
@@ -183,11 +186,14 @@ class GoodsList extends React.Component{
 										
 									</ul>
 								</div>
-							
+						
 							
 					</div>
-      </LazyLoad>
+      // </LazyLoad>
 			
+
+			
+
 			)
 	}
 }

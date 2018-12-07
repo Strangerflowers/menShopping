@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import "../../styles/classify.less";
 import Mheader from "../../components/Wheader.jsx";
+
 import { Link,NavLink } from "react-router-dom";
+
+import Footer from '../../components/Footer.jsx';
+
 
 class Classify extends Component {
   constructor(props) {
@@ -82,9 +86,9 @@ class Classify extends Component {
 
 		}else if (ggcId === '下装') {
 			gc_id = 2
-		}else if(ggcId=='鞋靴'){
+		}else if(ggcId==='鞋靴'){
       gc_id=1
-    }else if(ggcId=='美妆'){
+    }else if(ggcId==='美妆'){
       gc_id=470
     }else if(ggcId==='套装'){
       gc_id=3
@@ -209,6 +213,7 @@ class Classify extends Component {
             </ul>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }

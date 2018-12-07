@@ -3,12 +3,13 @@ import '../styles/Homecontent.less';
 import axios from 'axios';
 // 路由跳转
 import { Link } from "react-router-dom"
-// import { Link } from "react-router-dom";
+
+import Footer from '../components/Footer.jsx';
 
 
 // 引入轮播图
 import ReactSwiper from 'reactjs-swiper';
-// import Detail from './Details/details.jsx';
+
 // 轮播图组件
 const ReactSwiperExample = (props) => {
 	// console.log(props);
@@ -19,20 +20,17 @@ const ReactSwiperExample = (props) => {
 			title: props.banner[i].data,
 			link: props.banner[i].type
 		})
-		// console.log(props[i]);
-		// console.log(items);
 	}
   const swiperOptions = {
     preloadImages: true,
     autoplay: 4000,
-    autoplayDisableOnInteraction: false
+    autoplayDisableOnInteraction: false 
   };
   return (
     <ReactSwiper swiperOptions={swiperOptions} showPagination items={items}
                  className="swiper-example" />
   );
 };
-
 
 class Homecontent extends Component{
 	constructor(props){
@@ -44,22 +42,11 @@ class Homecontent extends Component{
 			// path: '/Details'
 		}
 	}
-	// 点击跳转详情页
-	// goPage(currentId){
-	// 	console.log(this);
-	// 	console.log(currentId);
-	// 	let {history} = this.props;
-	// 	history.push({
-	// 		pathname:this.state.path,
-	// 		id: currentId
-	// 	})
-
-	// }
 	// 获取页面数据
 	getData(){
 		axios.get('https://www.nanshig.com/mobile/index.php?act=index')
 		.then((res)=>{
-			console.log(res);
+			// console.log(res);
 			var data = res.data.datas;
 			var goods = [];
 			var banners = data[0].adv_list.item;
@@ -72,7 +59,6 @@ class Homecontent extends Component{
 				 goodslist : goods,
 				 banner : banners
 			})
-			// console.log(this.state.banner);
 		})
 		.catch((err)=>{
 			console.log(err);
@@ -109,31 +95,22 @@ class Homecontent extends Component{
 			 												<p className="price">{item.goods_price}</p>
 			 											</Link>
 			 											</li>
-
-			 											
-
 														)
-												})
+													})
 											})() 
 										}
 									</ul>
 								</div>
-
-								)
+							)
 						})
 					})()
 				}
-				 
+				<Footer/>
 			</div>
 
 		);
 	}
 }
-// <Link to={{pathname:'/details/',state:{id:item.goods_id}}} >
-// <Link to={`/details/${item.goods_id}`} >
-
-// <link to={{pathname: '/Details',state:item.goods_id}}>
-// Homecontent = withRouter(Homecontent);
 export default Homecontent;
 // onClick={this.goPage.bind(this,item.goods_id)}
 // <Link to={{

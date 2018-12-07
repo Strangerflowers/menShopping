@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import Footer from '../../components/Footer.jsx';
 import "../../styles/cart.less";
 
 class Cart extends Component{
@@ -52,11 +53,13 @@ class Cart extends Component{
 								</li>
 							</ul>
 						</div>
-						
+						<Footer />
+
 					</div>
 				</div>
-			);
-	}
+				);
+
+		}
 }
 
-export default Cart
+export default Cart; 

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { HashRouter as Router} from "react-router-dom";
+
 //引入antd-mobile
 import { Toast } from 'antd-mobile';
 import '../node_modules/antd-mobile/dist/antd-mobile.css'
@@ -10,8 +11,6 @@ import '../node_modules/antd-mobile/dist/antd-mobile.css'
 import axios from 'axios';
 import App from './App';
 
-//引入全局配置样式
-// import  './style/reset.less';
 import * as serviceWorker from './libs/serviceWorker';
 React.axios = axios;
 //使用
@@ -37,7 +36,4 @@ ReactDOM.render(
 	document.getElementById('root')
 )
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
