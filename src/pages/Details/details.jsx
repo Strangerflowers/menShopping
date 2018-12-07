@@ -7,11 +7,9 @@ import { Link } from "react-router-dom"
 class Content extends React.Component{
 	constructor(props){
 		super(props)
-		// console.log('props',props);
 		this.state={
 			goods: {},
 			bool: false,
-			// goodsDetail: [{goods_name:'',goods_price:''}]
 			goodsDetail: [],
 			goodsname: '',
 			Text1 : '',
