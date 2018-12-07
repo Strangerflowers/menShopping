@@ -112,9 +112,3 @@ class Homecontent extends Component{
 	}
 }
 export default Homecontent;
-// onClick={this.goPage.bind(this,item.goods_id)}
-// <Link to={{
-//       pathname: '/pay',
-//       search: '?sort=name',
-//       state: { price: 18 }
-//     }} />
