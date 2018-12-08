@@ -10,6 +10,7 @@ class Index extends Component{
 	constructor(props){
 		super(props);
 		this.props=props;
+		// console.log(this.props);
 	}
 	render(){
 		return (

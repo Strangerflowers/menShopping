@@ -32,10 +32,10 @@ class Addcart extends React.Component {
       colorSelect: colorArr,
       sizeSelect: sizeArr,
     });
-    console.log(333,this.state.goodsimg,'aaaaaaaaaa');
-    console.log(this.state.goodsdata,"bbbbbbbbbbbbbbb");
-    console.log(this.state.colorSelect,"CCCCCCCCC");
-    console.log(this.state.sizeSelect,"CCCCCCCCC");
+    // console.log(333,this.state.goodsimg,'aaaaaaaaaa');
+    // console.log(this.state.goodsdata,"bbbbbbbbbbbbbbb");
+    // console.log(this.state.colorSelect,"CCCCCCCCC");
+    // console.log(this.state.sizeSelect,"CCCCCCCCC");
 
   };
 
@@ -56,7 +56,7 @@ class Addcart extends React.Component {
   }
 
   onClose = () => {
-    console.log(444);
+    // console.log(444);
     this.setState({
       visible: false,
     });
@@ -127,7 +127,7 @@ class Addcart extends React.Component {
                      {
                       (()=>{
                         return this.state.colorSelect.map((item,index)=>{
-                          return (<span key={index} onClick={this.Highlighting.bind(this,index)} className={this.state.currentIndex==index?'active':''}>{item}</span>)
+                          return (<span key={index} onClick={this.Highlighting.bind(this,index)} className={this.state.currentIndex===index?'active':''}>{item}</span>)
                         })
                       })()
                      }
@@ -139,7 +139,7 @@ class Addcart extends React.Component {
                       {
                         (()=>{
                           return this.state.sizeSelect.map((item,index)=>{
-                            return (<span key={index} onClick={this.HighlightingSize.bind(this,index)} className={this.state.currentActive==index?'active':''}>{item}</span>)
+                            return (<span key={index} onClick={this.HighlightingSize.bind(this,index)} className={this.state.currentActive===index?'active':''}>{item}</span>)
                           })
                         })()
                        }

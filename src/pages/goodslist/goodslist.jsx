@@ -2,9 +2,9 @@ import React from 'react';
 import Mheader from "../../components/Wheader.jsx";
 import "../../styles/goodslist.less";
 
-import LazyLoad from 'react-lazyload';
+// import LazyLoad from 'react-lazyload';
 // import Scroll from 'react-bscroll';
-import InfiniteLoader from 'react-infinite-loader'
+// import InfiniteLoader from 'react-infinite-loader'
 // import 'react-bscroll/lib/react-scroll.css';
 import { Link } from "react-router-dom";
 

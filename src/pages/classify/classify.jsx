@@ -75,7 +75,7 @@ class Classify extends Component {
     this.setState({
       index:index
     })
-    console.log(this.state.index==index)
+    console.log(this.state.index===index)
 
 		let ggcId = e.target.innerHTML;
 		let gc_id;
@@ -147,7 +147,7 @@ class Classify extends Component {
                         this.navigateTo(e,index);
                       }}
                       className=" category-item-a category "
-                      className={this.state.index==index ?"sele ":""}
+                      className={this.state.index===index ?"sele ":""}
                     >
                       <div className="ci-fcategory-ico"> </div>
                       <div className="ci-fcategory-name ggcId" >

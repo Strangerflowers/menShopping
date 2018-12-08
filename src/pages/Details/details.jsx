@@ -21,7 +21,12 @@ class Content extends React.Component{
 			b: "222222",
 			goodsList: [],
 			goodsCon: [],
-			show: false
+			show: false, 
+			id:'',
+			title: [{path:'/details/',text: '商品'},{path:'/detailsImg/',text: '详情'},{path:'/evaluate/:id',text: '评价'}],
+			// title: [{path:'/details/:id',text: '商品'},{path:'/home',text: '详情'},{path:'/cart',text: '评价'}],
+			active: 0
+
 		}
 	}
 	// 获取数据
@@ -29,16 +34,17 @@ class Content extends React.Component{
 		var currentId = this.props.match.params.id;
 		axios.get(`https://www.nanshig.com/mobile/index.php?act=goods&op=goods_detail&goods_id=${currentId}&key=`)
 		.then((res)=>{
-			console.log(res.data.datas.goods_info.goods_spec);
+			// console.log(res.data.datas.goods_info.goods_spec);
 			var goodsSize = res.data.datas.goods_info.goods_spec;
 			var goodsColor = []
 			for(var key in goodsSize){
 				goodsColor.push(goodsSize[key]);
 
 			}
-			console.log(goodsColor);
+			// console.log(goodsColor);
 			var result = true; 
 			var data = res.data.datas;
+			var currentId = data.goods_info.goods_id;
 			var name = data.goods_info.goods_name;
 			var price = data.goods_info.goods_price;
 			var text1 = data.goods_hair_info.area_name;
@@ -63,8 +69,10 @@ class Content extends React.Component{
 				fahuo : faH,
 				fuwu : fuW,
 				goodsList : goodslist,
-				goodsCon: goodsColor
+				goodsCon: goodsColor,
+				id: currentId
 			})
+			// console.log(currentId);
 			// console.log(22222,this.state.bool);
 			// console.log(111,this.state.goods);
 		})
@@ -92,22 +100,71 @@ class Content extends React.Component{
 		// this.setState({
 		// 	show : true 
 		// })
-		console.log(1111);
+		// console.log(1111);
 	}
 	componentWillMount(){
-		this.getData();
+		this.getData(); 
 		// this.showTop();
 		// window.addEventListener('scroll',this.showTop)
 	}
 	 componentDidMount(){
 	 	window.addEventListener('scroll',this.showTop.bind(this))
-	 }
+
+	 }	
+
+
+
+
+
+	//  	componentDidMount = (id) => {
+	// axios.get(`https://www.nanshig.com/mobile/index.php?act=goods&op=goods_body&goods_id=${id}`)
+	// .then(res => {
+	// 	var a = res.data;
+	//     this.setState({
+	    	
+	//         goodsData : a,
+	//     });
+	// })
+	// .catch(error => {
+	// 	console.log(error);
+	//  });
+	// }
+	// componentWillUnmount = () => {
+	// 	this.setState = (state,callback)=>{
+	// 	  return;
+	// 	};
+	// }
+
+
+
 	render(){
 		return (
 			<div>
         		 <div>
 					<div className="details">
-					{this.state.show?<div className="top">1111</div>:null}
+					{this.state.show?<div className="top">
+						<div>
+						<Link to="/home">
+							<i className="iconfont icon-jiantouarrowhead7"></i>
+							</Link>
+						</div>
+						<div className="selectGoods">
+							{/*<span>商品</span>
+							<span>详情</span>
+							<span>评价</span>*/}
+							{
+								(()=>{
+									return this.state.title.map((item,index)=>{
+										return <Link to={`${item.path}${this.state.id}`}
+										 className={this.state.active===index?'active':''} key={index}><span>{item.text}</span></Link>
+									})
+								})()
+							}
+						</div>
+						<div>
+							<i className="iconfont icon-more"></i>
+						</div>
+					</div>:null}
 
 				
 						<div className="goodsImg">
@@ -128,7 +185,7 @@ class Content extends React.Component{
 									{
 										(()=>{
 											return this.state.goodsCon.map((item,index)=>{
-												return 	<span>{item}</span>
+												return 	<span key={index}>{item}</span>
 											})
 										})()
 									}
