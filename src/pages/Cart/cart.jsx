@@ -138,6 +138,28 @@ class Cart extends Component{
 			console.log(error)
 		})
 	}
+	remove(idx,e){
+		
+		var removeId=this.state.list.filter((item,i)=>{
+			return idx==i
+		})
+		React.axios.post('http://localhost:3000/goods/delGood',querystring.stringify({
+					_id:removeId[0]._id,
+					user:removeId[0].user
+				}))
+				.then((res)=>{
+					console.log(res);
+				
+					this.setState({
+						list:res.data.data
+					})
+				})
+				.catch((error)=>{
+					console.log(error);
+				})
+		console.log(removeId);
+	}
+	
 	componentDidMount() {
 	    this.getData();
 	  }
@@ -194,7 +216,7 @@ class Cart extends Component{
 												</div>
 												<div className="good_list">
 													<div className="cart_title">
-														<div className="name"><p>{item.name}</p> <span> <i className="iconfont icon-shanchu" ></i></span></div>
+														<div className="name"><p>{item.name}</p> <span  onClick={this.remove.bind(this,index)}> <i className="iconfont icon-shanchu" ></i></span></div>
 													</div>
 													<div className="price_qty">
 														<span className="price">
