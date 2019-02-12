@@ -5,9 +5,9 @@ var querystring = require('querystring');
 // axios.post('http://something.com/', querystring.stringify({ foo: 'bar' }));
 
 class Cart extends Component{
-	constructor(props){
-		super(props);
-		this.props = props;
+	constructor(){
+		super();
+		// this.props = props;
 		this.state={
 			list:[],
 			allcheck:false
@@ -15,24 +15,30 @@ class Cart extends Component{
 		
 	}
 	subNum(index){
+
 		var goodslist=this.state.list;
-		if(goodslist[index].stock>1){
-			goodslist[index].stock=goodslist[index].stock-1
-			var id=this.state.list[index]._id;
+
+		if(goodslist[index].qty>1){
+			goodslist[index].qty=goodslist[index].qty-1
+			var _id=this.state.list[index]._id;
+			var id=this.state.list[index].id;
 			var name=this.state.list[index].name;
-			var	type=this.state.list[index].type;
-			var	desc=this.state.list[index].desc;
+			var	user=this.state.list[index].user;
 			var	price=this.state.list[index].price;
-			var	imgpath=this.state.list[index].imgpath;
-			var	stock=goodslist[index].stock;
-			React.axios.post('/api/goods/updateGoods',querystring.stringify({
+			var	imgurl=this.state.list[index].imgurl;
+			var	qty=goodslist[index].qty;
+			var size=goodslist[index].size;
+			var color=goodslist[index].color;
+			React.axios.post('http://localhost:3000/goods/updateGoods',querystring.stringify({
+				_id:_id,
 				id:id,
 				name:name,
-				type:type,
-				desc:desc,
+				user:user,
 				price:price,
-				imgpath:imgpath,
-				stock:stock
+				imgurl:imgurl,
+				qty:qty,
+				size:size,
+				color:color
 			}))
 			.then((res)=>{
 				console.log(res);
@@ -54,39 +60,38 @@ class Cart extends Component{
 	
 	}
 	addNum(index){
-
-
 		var goodslist=this.state.list;
-		goodslist[index].stock=goodslist[index].stock+1
-		console.log(this.state.list);
-		var id=this.state.list[index]._id;
-		var name=this.state.list[index].name;
-		var	type=this.state.list[index].type;
-		var	desc=this.state.list[index].desc;
-		var	price=this.state.list[index].price;
-		var	imgpath=this.state.list[index].imgpath;
-		var	stock=goodslist[index].stock;
-		// console.log(id,name,type,desc,price,imgpath,stock);
-		React.axios.post('/api/goods/updateGoods',querystring.stringify({
-			id:id,
-			name:name,
-			type:type,
-			desc:desc,
-			price:price,
-			imgpath:imgpath,
-			stock:stock
-		}))
-		.then((res)=>{
-			console.log(res);
-			this.setState({
-				list:res.data.data
+		goodslist[index].qty=goodslist[index].qty+1
+			var _id=this.state.list[index]._id;
+			var id=this.state.list[index].id;
+			var name=this.state.list[index].name;
+			var	user=this.state.list[index].user;
+			var	price=this.state.list[index].price;
+			var	imgurl=this.state.list[index].imgurl;
+			var	qty=goodslist[index].qty;
+			var size=goodslist[index].size;
+			var color=goodslist[index].color;
+			React.axios.post('http://localhost:3000/goods/updateGoods',querystring.stringify({
+				_id:_id,
+				id:id,
+				name:name,
+				user:user,
+				price:price,
+				imgurl:imgurl,
+				qty:qty,
+				size:size,
+				color:color
+			}))
+			.then((res)=>{
+				// console.log(res);
+				// this.getData();
+				this.setState({
+					list:res.data.data
+				})
 			})
-			console.log(this.state.list)
-		})
-		.catch((error)=>{
-			console.log(error)
-		})
-
+			.catch((error)=>{
+				console.log(error)
+			})
 	}
 	// 点击全选勾选全部
 	chooseAll(){
@@ -115,12 +120,18 @@ class Cart extends Component{
 			})
 		}
 	}
+	handleChange(){
+		console.log(999);
+	}
 	getData(){
-		React.axios.post('/api/goods/getGoods')
+		React.axios.post('http://localhost:3000/goods/getGoods',querystring.stringify({
+			// id: goodId,
+			user:77,
+		}))
 		.then((res)=>{
-			console.log(res);
+			console.log('res=',res);
 			this.setState({
-				list:res.data.data.goodslist
+				list:res.data.data
 			})
 		})
 		.catch((error)=>{
@@ -162,7 +173,9 @@ class Cart extends Component{
 					</div>
 					<div className="cart_goods">
 						<div className="store">
-							<input type="checkbox" id="checkbox" checked={this.state.allcheck} name="" />
+							<input type="checkbox" id="checkbox" checked={this.state.allcheck}
+							onChange={this.handleChange.bind(this)} 
+							name="" />
 							<i className="iconfont icon-dianpu"></i>	
 							<h3>潮男搭配师</h3>
 						</div>
@@ -170,12 +183,14 @@ class Cart extends Component{
 							<ul>
 							{
 								(()=>{
+									console.log(this.state.list)
 									return this.state.list.map((item,index)=>{
 										return (
 											<li key={index}>
-												<input type="checkbox" className="check" onClick={this.singlecheck.bind(this,index)} checked={this.state.allcheck} name=""/>
+												<input type="checkbox" className="check" onClick={this.singlecheck.bind(this,index)} checked={this.state.allcheck}
+												 onChange={this.handleChange.bind(this)} name=""/>
 												<div className="cart_img">
-													<img src={item.imgpath} />
+													<img src={item.imgurl} />
 												</div>
 												<div className="good_list">
 													<div className="cart_title">
@@ -187,7 +202,7 @@ class Cart extends Component{
 														</span>
 														<span className="qty">
 															<input type="button" value="-" className="sub" onClick={this.subNum.bind(this,index)} name=""/>
-															<input type="text" className='txt' value={item.stock} name=""/>
+															<input type="text" className='txt' value={item.qty} name=""/>
 															<input type="button" value="+" className="add" onClick={
 																this.addNum.bind(this,index)
 															} name=""/>
