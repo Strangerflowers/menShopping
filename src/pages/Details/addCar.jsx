@@ -168,6 +168,12 @@ class Addcart extends React.Component {
         }))
         .then((res)=>{
           console.log(res);
+          let shop=res.data.data;
+          let count=res.data.data.length;
+          this.setState({
+            shopArr:shop,
+            len:count
+          })
         })
         .catch((error)=>{
           console.log(error)
@@ -190,6 +196,7 @@ class Addcart extends React.Component {
         }))
         .then((res)=>{
           console.log(res);
+          this.getLens();
         })
         .catch((error)=>{
           console.log(error);
