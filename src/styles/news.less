@@ -4,11 +4,11 @@
 	margin: 0;
 }
 .cart{
-	width: 100%;
+	.w(375);
 	height: 100%;
 	.header{
-		width: 100%;
-		.h(42);
+		.w(375);
+		.h(232);
 		.fs(12);
 		div{
 			.h(42);
@@ -23,12 +23,7 @@
 			.h(42);
 			display:flex;
 			justify-content: space-between;
-			// div{
-			// 	float: left;
-			// 	width: 15%;
-			// 	// height: 100%;
-			// 	.lh(42);				
-			// }
+			
 			.homeimg{
 				text-align: center;
 				.w(43);
@@ -39,53 +34,72 @@
 				}
 			}
 			.gologin{
-				width: 85%;
-				.padding(0,0,0,116);
+				.w(332);
 				.h(42);
 				.lh(42);
+				display:inline-block;
+				text-align:center;
 			}
 		} 
 		.center{
-			.h(84);
+			.h(190);
+			.margin(43,0,0,0);
+			display:inline-block;
+			.w(355);
 			.padding(0,0,0,20);
 			border-bottom: 1px solid #eee;
 			div{
-				span{
-					color: #ccc;
+				vertical-align: middle;
+				label{
+					color: #333;
 					.padding(0,0,0,30);
 					.margin(0,10,0,0);
+					.h(30);
+					.lh(34);
+					.fs(14);
+					display:inline-block;
 				}
 				input{
-					color: #ccc;
+					color: #333;
 					.h(30);
-					border: none;
+					.w(200);
+					.lh(30);
+					.fs(12);
+					// border: none;
 				}
 			}
 			.user{
 				border-bottom: 1px solid #eee;
 			}
-		}
-		.bottom{ 
-			// height: 100%;
-			width: 100%;
-			background: #f5f5f5;
-			div{
-				width: 100%;
-				span{
-					.padding(0,55,0,55);
-					.lh(60);
+			.buttom{ 
+				background:#eee;
+				.w(355);
+				display:inline-block;
+				background: #f5f5f5;
+				.reg{
+					width:100%;
+					display:inline-block;
+					background:#fff;
+					.seven{
+						.padding(0,20,0,20);
+						.lh(60);
+					}
+				}
+				.login1{
+					.w(338);
+					.h(40);
+					background: #ff5001;
+					border:1px solid #ff5001;
+					color: #fff;
+					.fs(18);
+					.lh(30);
+					// .padding(5,0,5,0);
+					border-radius: 10px;
+					.margin(20,0,0,0);
 				}
 			}
-			input{
-				.w(338);
-				.h(40);
-				background: #ff5001;
-				color: #fff;
-				.fs(18);
-				border-radius: 6%;
-				.margin(20,0,0,18);
-			}
 		}
+		
 	}
 	.login{
 		.fs(14);

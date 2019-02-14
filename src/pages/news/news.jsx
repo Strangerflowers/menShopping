@@ -15,17 +15,28 @@ class News extends Component{
 						</div>
 						<div className="center">
 							<div className="user">
-								<span>账户</span><input type="text" value="用户名/邮箱/已验证手机" />
+								<label htmlFor="uname">账户</label>
+								<input type="text" id="uname"
+								placeholder="用户名/邮箱/已验证手机" 
+								 />
 							</div>
 							<div>
-								<span>密码</span><input type="text" value="登陆密码" />
+								<label htmlFor="pwd">密码</label>
+								<input type="text" id="pwd"
+								placeholder="登陆密码"
+								 />
+							</div>
+							<div className="buttom">
+								<div className="reg">
+									<span className="seven">七天自动登陆</span>
+									<span className="seven">
+										<a href="https://www.baidu.com" >忘记密码?</a>
+									</span>
+								</div>
+								<input className="login1" type="button" value="登陆" />
 							</div>
 						</div>
-						<div className="bottom">
-							<div><span>七天自动登陆</span><span><a href="https://www.baidu.com" >忘记密码?</a></span></div>
-
-							<input type="button" value="登陆" />
-						</div>
+						
 					</div>
 					<div className="login">
 						<div>

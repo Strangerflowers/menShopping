@@ -7,6 +7,9 @@ import { HashRouter as Router} from "react-router-dom";
 import { Toast } from 'antd-mobile';
 import '../node_modules/antd-mobile/dist/antd-mobile.css'
 
+// 引入bootstrap
+import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap-theme.css';
 
 import axios from 'axios';
 import App from './App';
