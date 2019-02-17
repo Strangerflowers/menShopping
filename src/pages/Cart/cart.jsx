@@ -10,7 +10,9 @@ class Cart extends Component{
 		// this.props = props;
 		this.state={
 			list:[],
-			allcheck:false
+			allcheck:false,
+			selected:false,
+			data:[]
 		}
 		
 	}
@@ -97,7 +99,7 @@ class Cart extends Component{
 	chooseAll(){
 		// let all=document.querySelector(".all");
 		// var checks=document.querySelector('.check');
-		console.log(this.state.allcheck)
+		// console.log(this.state.allcheck)
 		if(this.state.allcheck){
 			this.setState({
 				 allcheck : false
@@ -109,19 +111,34 @@ class Cart extends Component{
 		}
 	}
 	// 点击单个
-	singlecheck(index){
-		if(this.state.allcheck){
-			this.setState({
-				 allcheck : false
-			})
-		}else{
-			this.setState({
-				 allcheck : true
-			})
-		}
+	singlecheck(idx,e){
+
+		let i=this.state.data.indexOf(idx);
+			// 如果i>0，也就是说该商品原本就在数组中，所以当再次点击的时候要将改商品从数组中移除
+			if(i>=0){
+				this.state.data.splice(i,1);
+				// this.total-=this.list[idx].qty*this.list[idx].price;
+			}else{
+				this.state.data.push(idx);
+				// this.total+=this.list[idx].qty*this.list[idx].price;
+			}
+			console.log(this.state.data.length)
+		console.log(this.state.data.length==this.state.list.length)
+		console.log(this.state.list.length)
+	if(this.state.data.length==this.state.list.length){
+		console.log(11,(this.state.data.length==this.state.list.length)?true:false)
+		//  this.state.allcheck = true;
+			// this.updateforce()
+			// this.forceUpdate();
+		// this.setState({
+		// 	allcheck:true
+		// })
 	}
-	handleChange(){
-		console.log(999);
+	
+		
+	}
+	handleChange(index){
+		console.log(index);
 	}
 	getData(){
 		React.axios.post('http://localhost:3000/goods/getGoods',querystring.stringify({
@@ -161,12 +178,14 @@ class Cart extends Component{
 	}
 	
 	componentDidMount() {
-	    this.getData();
+			this.getData();
+		
 	  }
 	    
 	  // 组件初始化时不调用，只有在组件将要更新时才调用，此时可以修改state
 	  // componentWillUpdata(nextProps, nextState)
 	  componentWillUpdata(){
+
 	  	// this.getData();
 	  }
 	  // 组件初始化时不调用，组件更新完成后调用，此时可以获取dom节点。
@@ -194,13 +213,14 @@ class Cart extends Component{
 					    </div>
 					</div>
 					<div className="cart_goods">
-						<div className="store">
-							<input type="checkbox" id="checkbox" checked={this.state.allcheck}
-							onChange={this.handleChange.bind(this)} 
+						{/* <div className="store">
+							<input type="checkbox" id="checkbox" 
+						
+							// onChange={this.handleChange.bind(this)} 
 							name="" />
 							<i className="iconfont icon-dianpu"></i>	
 							<h3>潮男搭配师</h3>
-						</div>
+						</div> */}
 						<div className="cart_list">
 							<ul>
 							{
@@ -209,8 +229,11 @@ class Cart extends Component{
 									return this.state.list.map((item,index)=>{
 										return (
 											<li key={index}>
-												<input type="checkbox" className="check" onClick={this.singlecheck.bind(this,index)} checked={this.state.allcheck}
-												 onChange={this.handleChange.bind(this)} name=""/>
+												<input type="checkbox" className="check"
+												onChange={this.singlecheck.bind(this,index)}
+												// checked={this.state.allcheck}
+												checked={this.state.data[index]}
+												 name=""/>
 												<div className="cart_img">
 													<img src={item.imgurl} />
 												</div>
@@ -245,7 +268,11 @@ class Cart extends Component{
 					</div>
 					<div className="Settlement">
 						<div className="allcheck">
-							<input type="checkbox" className="all" onClick={this.chooseAll.bind(this)} name="checkbox" />全选
+							<input type="checkbox" className="all"
+							 onChange={this.chooseAll.bind(this)}
+							 checked={(this.state.data.length==this.state.list.length)?true:false}
+							// checked={false}
+							  name="checkbox" />全选
 						</div>
 						<div className="total_prite">
 							<div className="price_l">合计：	<span className="heji"> ￥</span></div>
