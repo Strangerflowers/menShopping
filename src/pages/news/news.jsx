@@ -1,8 +1,30 @@
 import React,{Component} from 'react';
 import '../../styles/news.less';
 import Footer from '../../components/Footer.jsx';
+import {Route,NavLink,Switch,Redirect} from 'react-router-dom';
 
 class News extends Component{
+	constructor(){
+		super();
+		this.state={
+			user:''
+		}
+		this.login=this.login.bind(this);
+		this.inputChange=this.inputChange.bind(this);
+	}
+	// 输入改变
+	inputChange(e){
+		console.log(e.target.value);
+		this.setState({
+			user:e.target.value
+		})
+	}
+
+	login(){
+		sessionStorage.setItem('token',this.state.user);
+		this.props.history.push('/home')
+	}
+
 	render(){
 		return (
 				<div className='cart'>
@@ -17,12 +39,14 @@ class News extends Component{
 							<div className="user">
 								<label htmlFor="uname">账户</label>
 								<input type="text" id="uname"
+								value={this.state.user}
+								onChange={this.inputChange}
 								placeholder="用户名/邮箱/已验证手机" 
 								 />
 							</div>
 							<div>
 								<label htmlFor="pwd">密码</label>
-								<input type="text" id="pwd"
+								<input type="password" id="pwd"
 								placeholder="登陆密码"
 								 />
 							</div>
@@ -33,7 +57,7 @@ class News extends Component{
 										<a href="https://www.baidu.com" >忘记密码?</a>
 									</span>
 								</div>
-								<input className="login1" type="button" value="登陆" />
+								<input className="login1" type="button" onClick={this.login} value="登陆" />
 							</div>
 						</div>
 						

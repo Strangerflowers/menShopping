@@ -193,7 +193,9 @@ class Content extends React.Component{
 							<i className="iconfont icon-icon-test"></i>
 						</div>
 					</div>
-					｛this.state.goods?<Addcar data={this.state.goods} id={this.props.match.params.id}/>: null｝
+					｛this.state.goods?<Addcar data={this.state.goods}
+					 history ={this.props.history} 
+					 id={this.props.match.params.id}/>: null｝
 				</div>
 			</div>
 		)

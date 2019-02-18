@@ -4,6 +4,26 @@ import React from 'react';
 import "../../styles/mine.css";
 // import "../../styles/base1.css";
 class User extends React.Component {
+
+	constructor(){
+		super();
+		this.state={
+
+		}
+		this.login=this.login.bind(this)
+	}
+	login(){
+		var user=sessionStorage.getItem('token')
+		if(user){
+			sessionStorage.removeItem('token');
+			
+		}else{
+			this.props.history.push('/news')
+		}
+	}
+	componentDidMount(){
+		var user=sessionStorage.getItem('token');
+	}
 	render() {
 		return (
 			<div className="scroller-body">
@@ -12,12 +32,13 @@ class User extends React.Component {
 						<div className="member-info">
 							<div className="user-avatar">
 								<img src="https://www.nanshig.com/data/upload/shop/common/default_user_portrait.gif" /> </div>
-							<div className="user-name"> <span>登录<sup></sup></span> </div></div>
+							<div className="user-name"> <span onClick={this.login}>{sessionStorage.getItem('token')?sessionStorage.getItem("token"):'登录'}
+							{sessionStorage.getItem('token')?'退出登录':''}</span> </div></div>
 						<div className="member-collect">
 							<span><a href="favorites.html"><em>0</em><p>商品收藏</p></a> </span>
 							<span><a href="favorites_store.html"><em>0</em><p>店铺收藏</p></a> </span>
 							<span><a href="views_list.html"><i className="goods-browse"></i><p>我的足迹</p></a> </span>
-						</div>
+						</div> 
 					</div>
 					{/* <div className="member-center">
 						<dl className="mt5">

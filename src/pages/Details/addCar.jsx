@@ -1,6 +1,7 @@
 import 'antd/dist/antd.css';
 import React from 'react';
 import { Drawer, Button, Radio } from 'antd';
+import {Route,NavLink,Switch,Redirect} from 'react-router-dom';
 import '../../styles/addcart.less';
 import axios from 'axios';
 const RadioGroup = Radio.Group;
@@ -26,6 +27,7 @@ class Addcart extends React.Component {
     }
     this.addCart=this.addCart.bind(this);
     this.getLens=this.getLens.bind(this);
+    this.goutoCart=this.goutoCart.bind(this);
   }
  
 //  点击加入购物车或者购买的时候，出现遮罩层
@@ -110,9 +112,10 @@ class Addcart extends React.Component {
 // 查询购物车的数据，获取购物车的商品的件数，与拿到购物车的所有商品，然后进行判断，所加的商品是否已经存在购物车中
   getLens(){
         var querystring = require('querystring');
+        var user=sessionStorage.getItem('token');
        axios.post('http://localhost:3000/goods/getGoods',querystring.stringify({
           // id: goodId,
-          user:77,
+          user:user,
         }))
         .then((res)=>{
           console.log(res);
@@ -132,79 +135,88 @@ class Addcart extends React.Component {
 
 
   addCart(){
-    var querystring = require('querystring'); 
-        // var currentId = this.props.match.params.id;
-				// var user=sessionStorage.getItem('token');
-        // console.log('sessionStorage',sessionStorage.getItem('token'))
-        console.log(111)
-    this.setState({
-      cartId:this.state.shopArr.filter((item)=>{
-        console.log(222)
+    let user=sessionStorage.getItem('token');
+    if(user){
+      console.log(user)
+      var querystring = require('querystring'); 
+          // var currentId = this.props.match.params.id;
+          // var user=sessionStorage.getItem('token');
+          // console.log('sessionStorage',sessionStorage.getItem('token'))
+          console.log(111)
+      this.setState({
+        cartId:this.state.shopArr.filter((item)=>{
+          console.log(222)
 
-        return item.id==this.props.id;
-      }),
-     
-    },()=>{
-      console.log(333)
-      if(this.state.cartId.length>0){
-        console.log(444)
-        console.log('cartId=',this.state.cartId)
-        console.log('value=',this.state.value)
-        // 存在，数量+1
-        let updataNum=this.state.value+this.state.cartId[0].qty;
-        console.log('qty=',this.state.cartId[0].qty);
-       
-        console.log('updataNum',updataNum)
-        axios.post('http://localhost:3000/goods/updateGoods',querystring.stringify({
-          _id:this.state.cartId[0]._id,
-          id:this.state.cartId[0].id,
-          name:this.state.cartId[0].name,
-          user:'77',
-          price:this.state.cartId[0].price,
-          imgurl:this.state.cartId[0].imgurl,
-          qty: updataNum,
-          size:this.state.cartId[0].size,
-          color:this.state.cartId[0].color,
-        }))
-        .then((res)=>{
-          console.log(res);
-          let shop=res.data.data;
-          let count=res.data.data.length;
-          this.setState({
-            shopArr:shop,
-            len:count
-          })
-        })
-        .catch((error)=>{
-          console.log(error)
-        })
+          return item.id==this.props.id;
+        }),
+      
+      },()=>{
+        console.log(333)
+        if(this.state.cartId.length>0){
+          console.log(444)
+          console.log('cartId=',this.state.cartId)
+          console.log('value=',this.state.value)
+          // 存在，数量+1
+          let updataNum=this.state.value+this.state.cartId[0].qty;
+          console.log('qty=',this.state.cartId[0].qty);
         
-      }else{
-          // 第一次添加购物车
-        console.log(555)
-
-        axios.post('http://localhost:3000/goods/addGoods',querystring.stringify({
-          id:this.props.id ,
-          name:this.state.goodsdata.goods_name,
-          user:'77',
-          price:this.state.goodsdata.goods_price,
-          imgurl:this.state.goodsimg,
-          qty:this.state.value,
-          size:this.state.size,
-          color:this.state.color,
+          console.log('updataNum',updataNum)
+          axios.post('http://localhost:3000/goods/updateGoods',querystring.stringify({
+            _id:this.state.cartId[0]._id,
+            id:this.state.cartId[0].id,
+            name:this.state.cartId[0].name,
+            user:user,
+            price:this.state.cartId[0].price,
+            imgurl:this.state.cartId[0].imgurl,
+            qty: updataNum,
+            size:this.state.cartId[0].size,
+            color:this.state.cartId[0].color,
+          }))
+          .then((res)=>{
+            console.log(res);
+            let shop=res.data.data;
+            let count=res.data.data.length;
+            this.setState({
+              shopArr:shop,
+              len:count
+            })
+          })
+          .catch((error)=>{
+            console.log(error)
+          })
           
-        }))
-        .then((res)=>{
-          console.log(res);
-          this.getLens();
-        })
-        .catch((error)=>{
-          console.log(error);
-        })
-      }
-    })		  
-  }
+        }else{
+            // 第一次添加购物车
+          console.log(555)
 
+          axios.post('http://localhost:3000/goods/addGoods',querystring.stringify({
+            id:this.props.id ,
+            name:this.state.goodsdata.goods_name,
+            user:user,
+            price:this.state.goodsdata.goods_price,
+            imgurl:this.state.goodsimg,
+            qty:this.state.value,
+            size:this.state.size,
+            color:this.state.color,
+            
+          }))
+          .then((res)=>{
+            console.log(res);
+            this.getLens();
+          })
+          .catch((error)=>{
+            console.log(error);
+          })
+        }
+      })	
+    }else{
+      alert('请前往登录')
+    }	  
+  }
+  goutoCart(){
+    console.log(this.props);
+    this.props.history.push('/cart/')
+  }
   componentDidMount(){
     this.getLens()
   }
@@ -214,7 +226,7 @@ class Addcart extends React.Component {
       <div className="addcart">
           <div>
             <span className="service">客服</span>
-            <span className="car">购物车 </span>
+            <span className="car" onClick={this.goutoCart}>购物车 </span>
             <RadioGroup
               style={{ marginRight: 8 }}
               defaultValue={this.state.placement}
